@@ -1,0 +1,12 @@
+.list-group {
+    margin-top: 50px;
+    cursor: pointer;
+    max-height: 400px;
+    overflow: auto;
+    text-align: center;
+}
+
+.list-group-item.active {
+    background-color: #9584b8;
+    border-color: #9584b8;
+}

@@ -1,0 +1,61 @@
+.tour-card {
+    width: 300px;
+    cursor: 'pointer';
+    border:'light';
+    border-radius: 12px;
+    margin: 20px auto;
+    box-shadow: 0px 12px 32px 0px rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 2px 4px 0px rgba(28, 5, 77, 0.1);
+
+}
+
+.img-container { 
+    position: relative;
+    overflow:hidden;
+    width:300px;
+    height:300px;
+}
+
+.img-container img {
+    position: absolute;
+    top:50%;
+   left:50%;
+   transform:translate(-50%,-50%);
+   width:300px;
+   height:300px;
+   object-fit:cover;
+}
+
+.tour-card-content {
+    padding: 15px;
+}
+
+.tour-title {
+    color: #9584b8;
+}
+
+.tour-description {
+    
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    line-height: 1.3em;
+    height: 3.9em;
+}
+
+// .tour-description::after {
+//     content: ''; /* Выводим элемент */
+//     position: absolute; /* Абсолютное позиционирование */
+//     right: 0; top: 0; /* Положение элемента */
+//     width: 40px; /* Ширина градиента*/
+//     height: 100%; /* Высота родителя */
+//     /* Градиент */
+//     background: linear-gradient(90deg, transparent, #ffffff 50%);
+//     // background: -moz-linear-gradient(left, rgba(255,204,0, 0.2), white);
+//     // background: -webkit-linear-gradient(left, rgba(255,204,0, 0.2), white);
+//     // background: -o-linear-gradient(left, rgba(255,204,0, 0.2), white);
+//     // background: -ms-linear-gradient(left, rgba(255,204,0, 0.2), white);
+//     // background: linear-gradient(to right, rgba(255,204,0, 0.2), white);
+//    }
+

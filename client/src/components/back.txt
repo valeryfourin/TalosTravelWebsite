@@ -1,0 +1,112 @@
+import { useContext, useState } from 'react';
+import React from 'react';
+import { observer } from 'mobx-react-lite';
+import { Dropdown, DropdownButton, FormControl, InputGroup, Col, Row, Button } from 'react-bootstrap';
+import {Context} from '../index';
+
+const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
+    <a
+      href=""
+      ref={ref}
+      onClick={(e) => {
+        e.preventDefault();
+        onClick(e);
+      }}
+    >
+      {children}
+      &#x25bc;
+    </a>
+  ));
+  
+  // forwardRef again here!
+  // Dropdown needs access to the DOM of the Menu to measure it
+  const CustomMenu = React.forwardRef(
+    ({ children, style, className, 'aria-labelledby': labeledBy }, ref) => {
+      const [value, setValue] = useState('');
+  
+      return (
+        <div
+          ref={ref}
+          style={style}
+          className={className}
+          aria-labelledby={labeledBy}
+        >
+          <FormControl
+            autoFocus
+            className="mx-3 my-2 w-auto"
+            placeholder="Type to search..."
+            onChange={(e) => setValue(e.target.value)}
+            value={value}
+          />
+          <ul className="list-unstyled">
+            {React.Children.toArray(children).filter(
+              (child) =>
+                !value || child.props.children.toLowerCase().startsWith(value),
+            )}
+          </ul>
+        </div>
+      );
+    },
+  );
+  
+const CountryDropdown = observer(() => {
+
+ 
+  const {tour} = useContext(Context);
+  return (
+    <Dropdown
+    
+                title="Country"
+                id="input-group-dropdown-1"
+                >
+      <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
+        Country
+      </Dropdown.Toggle>
+  
+      <Dropdown.Menu as={CustomMenu}>
+        <Dropdown.Item eventKey="1">Red</Dropdown.Item>
+        <Dropdown.Item eventKey="2">Blue</Dropdown.Item>
+        <Dropdown.Item eventKey="3" active>
+          Orange
+        </Dropdown.Item>
+        <Dropdown.Item eventKey="1">Red-Orange</Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
+  );
+});
+
+export default CountryDropdown;
+
+
+//////////////////////////////////////////////////////////////////////////////
+import React, { useState } from 'react';
+import {NavLink} from 'react-router-dom';
+import { OFFERS_ROUTE } from '../utils/consts';
+
+const Logo = () => {
+    const [imgNumber, setImgNumber] = useState(1);
+    let img = document.getElementById("logo");
+    document.getElementById("nav-Link").addEventListener('hover', () => {
+        if (imgNumber == 1) {
+            img.src = "./images/logos/talostravellogoBigTVioletFly.png";
+            imgNumber++;
+        }
+        else if (imgNumber == 2) {
+            img.src = "./images/logos/talostravellogoBigTBlueFly.png";
+            imgNumber++;
+        }
+        else if (imgNumber == 3) {
+            img.src = "./images/logos/talostravellogoBigT.png";
+            setImgNumber(1);
+        }
+    }, false);
+    return (
+        // <NavLink to={OFFERS_ROUTE} id="navLink" href="#home">
+        <div id="nav-Link">
+        <img src="./images/logos/talostravellogoBigTVioletFly.png" className="logo" id="logo" alt="logo" />
+        // 
+        </div>
+    );
+};
+
+export default Logo;

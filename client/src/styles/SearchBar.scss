@@ -1,0 +1,52 @@
+* {
+    font-size: 20px;
+}
+
+.input-item{
+    margin: 5px;
+    height: 70px;
+}
+
+#input-group-dropdown-1 { 
+    background-color: white;
+}
+
+#input-group-dropdown-1:hover {
+    background-color: #9584b8;
+}
+
+#find-btn {
+    background-color: #9584b8;
+    color: white;
+}
+
+#find-btn:hover {
+    background-color: #756792;
+    color: white;
+}
+
+.country-dropdown-item:active {
+    background-color: #9584b8;
+}
+
+.dropdown-menu.show {
+    display: block;
+    height: 250px;
+    overflow-y: scroll;
+}
+
+.react-daterange-picker__wrapper {
+    background-color: white;
+}
+
+[aria-describedby="basic-addon1"] {
+    width: 200px;
+}
+
+.react-daterange-picker__wrapper {
+    border: 1px solid gray;
+    border-radius: 5px;
+    color: grey !important;
+}
+
+

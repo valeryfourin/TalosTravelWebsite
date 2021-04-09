@@ -1,0 +1,15 @@
+.auth-card {
+    width: 600px;
+    // padding: 5px;
+    // background-color: #efefef;
+}
+
+.form-container {
+    min-height: 50vh;
+}
+
+@media screen and (max-width: 500px) {
+    .form-container {
+        height: 400px;
+    }
+}

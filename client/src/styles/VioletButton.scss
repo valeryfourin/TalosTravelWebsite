@@ -1,0 +1,35 @@
+
+.search-button {
+    background-color: white;
+    color: #6c757d;
+    border-color: #6c757d;
+    border-radius: 5px;
+    text-align: center !important;
+    // display: flex;
+    // align-items: center;
+    height: 70px; 
+    a { color: #6c757d;}
+}
+
+.search-button:active {
+    background-color: #9584b8;
+    color: white;
+}
+
+.search-button:hover {
+    background-color: #9584b8 !important;
+    border-color: #9584b8 !important;
+    a { 
+        color: #fff !important; 
+        text-decoration: none;
+    }
+}
+
+.search-button:active::after {
+    background-color: #9584b8 !important;
+    border-color: #9584b8 !important;
+    a { 
+        color: #fff !important; 
+        text-decoration: none;
+    }
+}
