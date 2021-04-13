@@ -10,7 +10,7 @@ const TourList = observer(() => {
 
     return (
         <Row className="tour-list-container">
-            {tour.Tours.map(tour => 
+            {tour.tours && tour.tours.map(tour => 
                 <TourItem key={tour.id} tour={tour}/>
             )}
         </Row>

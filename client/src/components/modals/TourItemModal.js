@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Button, Image, Modal, Row } from "react-bootstrap";
+import { Image, Modal } from "react-bootstrap";
 import VioletButton from '../VioletButton';
 
 const TourModal = (props) => {

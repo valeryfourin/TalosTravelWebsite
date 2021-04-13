@@ -14,11 +14,11 @@ export default class GuestsCount extends React.Component {
   }
 
     incrementClick = (data) => (e) => {
-        if (this.state.count == 10) { return; }
+        if (this.state.count === 10) { return; }
         else { this.setState({ count: this.state.count + 1 }); }
   };
     decrementClick = (data) => (e) => {
-        if (this.state.count == 1) { return; }
+        if (this.state.count === 1) { return; }
         else { this.setState({ count: this.state.count - 1 }); }
   };
 

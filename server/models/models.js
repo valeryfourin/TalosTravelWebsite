@@ -12,15 +12,15 @@ const User = sequelize.define( 'user', {
 
 const Tour = sequelize.define( 'tour', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    title: {type: DataTypes.STRING, unique: true, allowNull: false},
-    country: {type: DataTypes.STRING, allowNull: false},
+    title: {type: DataTypes.STRING, unique: true, allowNull: true},
+    country: {type: DataTypes.STRING, allowNull: true},
     type: {type: DataTypes.STRING, defaultValue: "bus" },
     description: {type: DataTypes.STRING},
     img: {type: DataTypes.STRING},
     nights: {type: DataTypes.INTEGER},
     startDate: {type: DataTypes.STRING},
     endDate: {type: DataTypes.STRING},
-    cost: {type: DataTypes.INTEGER, allowNull: false},
+    cost: {type: DataTypes.INTEGER, allowNull: true},
     activities: {type: DataTypes.TEXT}
 });
 

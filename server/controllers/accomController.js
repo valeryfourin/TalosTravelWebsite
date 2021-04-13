@@ -15,8 +15,6 @@ class AccomController {
         } catch (e) {
             next(ApiError.badRequest(e.message));
         }
-
-
     }
 
     async getAll(req, res) {

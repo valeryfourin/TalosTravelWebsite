@@ -1,13 +1,13 @@
 import { useContext, useState } from 'react';
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import { Dropdown, DropdownButton, FormControl, InputGroup, Col, Row, Button } from 'react-bootstrap';
+import { Dropdown,  FormControl } from 'react-bootstrap';
 import {Context} from '../index';
 import VioletButton from './VioletButton';
 
 const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     <a
-      href=""
+      // href=""
       ref={ref}
       className="country-toggle-link"
       onClick={(e) => {
@@ -75,9 +75,8 @@ const CountryDropdown = observer(() => {
         </Dropdown.Toggle>
       }>
       </VioletButton>
-  
       <Dropdown.Menu as={CustomMenu}>
-        {tour.Tours.map(country => 
+        {tour.tours && tour.tours.map(country => 
             <Dropdown.Item href="#" className="country-dropdown-item" onClick={() => {setChosenCountry(country.country)}} key={country.id}>{country.country}</Dropdown.Item>
         )}
       </Dropdown.Menu>

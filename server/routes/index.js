@@ -6,6 +6,6 @@ const accomRouter = require('./accomRouter');
 
 router.use('/user', userRouter);
 router.use('/tour', tourRouter);
-router.use('/accomodation', accomRouter);
+router.use('/accommodation', accomRouter);
 
 module.exports = router;

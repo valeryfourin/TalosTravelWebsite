@@ -3,7 +3,6 @@ import '../styles/NavBar.scss';
 import {Context} from '../index';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import Button from 'react-bootstrap/Button';
 import {useHistory, NavLink} from 'react-router-dom';
 import { ADMIN_ROUTE, LOGIN_ROUTE, OFFERS_ROUTE } from '../utils/consts';
 import {observer} from "mobx-react-lite";
@@ -15,6 +14,11 @@ import VioletButton from './VioletButton';
 const NavBar = observer(() => {
     const {user} = useContext(Context);
     const history = useHistory();
+
+    const logOut = () => {
+      user.setUser({});
+      user.setIsAuth(false);
+    }
 
   return (
     <Navbar bg="light" expand="lg" className="NavBar">
@@ -34,13 +38,13 @@ const NavBar = observer(() => {
                 text="Admin"/>
               <VioletButton  
                 style={{height:'auto', marginLeft: '20px', marginBottom: '2px', width: '110px'}} 
-                onClick={() => user.setIsAuth(false)} 
+                onClick={() => logOut()} 
                 text="Sign out"/>
             </Nav>
             :
             <VioletButton 
             style={{height:'auto', marginLeft: '20px', marginBottom: '2px'}}
-              onClick={() => user.setIsAuth(true)} 
+              onClick={() => history.push(LOGIN_ROUTE)} 
               text="Sign in"/>
               }
         </Navbar.Collapse>

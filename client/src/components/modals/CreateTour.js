@@ -1,21 +1,50 @@
-import React, { useContext, useState } from 'react';
-import { Button, Col, Dropdown, Form, Modal, Row } from 'react-bootstrap';
-// import '../styles/Admin.scss';
-// import VioletButton from '../VioletButton'
+import { observer } from 'mobx-react-lite';
+import React, { useContext, useEffect, useState } from 'react';
+import { Button, Dropdown, Form, Modal} from 'react-bootstrap';
+import { createTour, fetchAccomms, fetchTours } from '../../http/tourAPI';
 import {Context} from '../../index';
 import VioletButton from '../VioletButton';
 
-const CreateTour = ({show, onHide, ...props}) => {
+const CreateTour = observer(({show, onHide, ...props}) => {
     const {tour} = useContext(Context);
+    const [title, setTitle] = useState('');
+    const [country, setCountry] = useState('');
+    const [description, setDescription] = useState('');
+    const [img, setImg] = useState('');
+    const [cost, setCost] = useState('');
+    const [type, setType] = useState(null);
+    const [activities, setActivities] = useState([]);
+
+    useEffect(() => {
+      fetchTours().then(data => tour.setTours(data))
+      fetchAccomms().then(data => tour.setAccomms(data.rows))
+    }, []);
+
     const [accommodation, setAccommodation] = useState([]);
 
     const addAccommodation = () => {
         setAccommodation([...accommodation, {type: '', title: '', address: '', description: '', img: '', price: '', stars: '', number: Date.now()}])
     }
 
-    const removeAccommodation= (number) => {
+    const removeAccommodation = (number) => {
         setAccommodation(accommodation.filter(i => i.number !== number))
     }
+    
+    const addTour = () => {
+      const formData = new FormData();
+      formData.append('title', title);
+      formData.append('country', country);
+      formData.append('description', description);
+      formData.append('img', img);
+      formData.append('cost', `${cost}`);
+      formData.append('type', type);
+      formData.append('activities', JSON.stringify(activities));
+      createTour(formData).then(data => onHide())
+    }
+
+    //   console.log(formData)
+    //   createTour(tourBody).then(data => onHide())
+    // }; 
 
     return (
         <Modal
@@ -34,21 +63,60 @@ const CreateTour = ({show, onHide, ...props}) => {
       <Modal.Body>
         <Form>
             
-            <Form.Control className="mt-2 mb-2" placeholder={'Input title'}/>
+            <Form.Control 
+              value={title}
+              onChange={e => setTitle(e.target.value)}
+              className="mt-2 mb-2" 
+              placeholder={'Input title'}
+              />
             <Dropdown className="mt-2 mb-2"> 
-                <Dropdown.Toggle>Choose type:</Dropdown.Toggle>
+                <Dropdown.Toggle>{ type == null ? 'Choose type:' : type}</Dropdown.Toggle>
                 <Dropdown.Menu>
-                    <Dropdown.Item>Bus</Dropdown.Item>
-                    <Dropdown.Item>Railway</Dropdown.Item>
-                    <Dropdown.Item>Air</Dropdown.Item>
+                    <Dropdown.Item
+                      value='Bus'
+                      onClick={e => setType(e.target.text)}
+                      >Bus</Dropdown.Item>
+                    <Dropdown.Item 
+                      value='Railway'
+                      onClick={e => setType(e.target.text)}
+                      >Railway</Dropdown.Item>
+                    <Dropdown.Item 
+                      value='Air'
+                      onClick={e => setType(e.target.text)}
+                      >Air</Dropdown.Item>
                 </Dropdown.Menu>
             </Dropdown>
             
-            <Form.Control className="mt-2 mb-2" placeholder={'Input country'}/>
-            <Form.Control className="mt-2 mb-2" as="textarea" rows={3} placeholder={'Input description (max character 900)'}/>
-            <Form.Control className="mt-2 mb-2" placeholder={'Input image preview name'}/>
-            <Form.Control className="mt-2 mb-2" placeholder={'Input price'}/>
-            <Form.Control className="mt-2 mb-2" as="textarea" rows={2} placeholder={'Input activities (divide with a coma)'}/>
+            <Form.Control 
+              value={country}
+              onChange={e => setCountry(e.target.value)}
+              className="mt-2 mb-2" 
+              placeholder={'Input country'}/>
+            <Form.Control 
+              value={description}
+              onChange={e => setDescription(e.target.value)}
+              className="mt-2 mb-2" 
+              as="textarea" 
+              rows={3} 
+              placeholder={'Input description (max character 900)'}/>
+            <Form.Control 
+              value={img}
+              onChange={e => setImg(e.target.value)}
+              className="mt-2 mb-2" 
+              placeholder={'Input image preview name'}/>
+            <Form.Control 
+              value={cost}
+              onChange={e => setCost(Number(e.target.value))}
+              className="mt-2 mb-2" 
+              id="numbersOnlyInput"
+              placeholder={ cost == '' ? 'Input price per night:' : cost}
+              type="number"/>
+            <Form.Control 
+              value={activities}
+              onChange={e => setActivities(e.target.value)}
+              className="mt-2 mb-2" 
+              as="textarea" rows={2} 
+              placeholder={'Input activities (divide with a coma)'}/>
             <hr />
             <h4>Accommodation</h4>
             <VioletButton 
@@ -105,13 +173,13 @@ const CreateTour = ({show, onHide, ...props}) => {
         </Button>
         <Button 
             variant={'outline-success'}
-            onClick={onHide}>
+            onClick={addTour}>
                 Add
         </Button>
       </Modal.Footer>
     </Modal>
-  );
-}
+  )
+});
 
 export default CreateTour;
 

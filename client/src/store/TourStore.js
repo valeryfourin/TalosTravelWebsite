@@ -3,108 +3,108 @@ import {makeAutoObservable} from "mobx";
 export default class TourStore {
     constructor() {
         this._tours = [
-            {
-                "id": 1,
-                "title": "Vibrant Dominicana Vacation",
-                "country": "Dominicana",
-                "type": "air",
-                "description": "This country is famous for its beaches that Columbus himself admired centuries ago, medieval buildings and original rum.\nYou should not miss Santo Domingo - the Dominican capital. One of the well known Dominican resorts is Punta Cana.",
-                "img": "dominicanaPreview.jpg",
-                "nights": null,
-                "startDate": "2021-06-12",
-                "endDate": "2021-06-22",
-                "cost": 110,
-                "activities": [
-                    "Humpback Whale Watching 70 $",
-                    "Jeep Safari 4x4 Punta Cana 150 $",
-                    "Bay of the Eagles 90 $",
-                    "Beach Sightseeing Point 35 $"
-                ],
-                "createdAt": "2021-03-16T08:51:45.852Z",
-                "updatedAt": "2021-03-16T08:51:45.852Z"
-            },
-            {
-                "id": 2,
-                "title": "Weekend in Berling",
-                "country": "Germany",
-                "type": "bus",
-                "description": "Country of football, best cars, great beer. Simple and delicious cuisine, world-famous pedantry and German quality, driving rock music, delightful museums, ideal roads and noisy festivals.",
-                "img": "berlinPreview.jpg",
-                "nights": null,
-                "startDate": null,
-                "endDate": null,
-                "cost": 35,
-                "activities": [
-                    "Sachsenhausen Memorial Walking Tour 10 $",
-                    "1-Hour City Tour by Boat with Guaranteed Seating 15 $"
-                ],
-                "createdAt": "2021-03-16T14:03:33.375Z",
-                "updatedAt": "2021-03-16T14:03:33.375Z"
-            },
-            {
-                "id": 3,
-                "title": "Vatican Tours",
-                "country": "Italy",
-                "type": "bus",
-                "description": "Benvenuto! An Italy tour is the best way to experience your next vacation to Italy. Whether you want to trace history in Rome, taste wines in Tuscany, shop in Milan, drive the scenic Amalfi Coast, or explore the canals of Venice.",
-                "img": "vaticanPreview.jpg",
-                "nights": null,
-                "startDate": "",
-                "endDate": "",
-                "cost": 20,
-                "activities": [
-                    "Colosseum & Ancient Rome Tour with Roman Forum & Palatine Hill 40 $",
-                    "Full-Day Combo: Complete Vatican Museums, Sistine Chapel & Colosseum 56 $",
-                    "Pompeii & Mt. Vesuvius Volcano Day Trip from Rome 39 $"
-                ],
-                "createdAt": "2021-03-16T14:13:15.842Z",
-                "updatedAt": "2021-03-16T14:13:15.842Z"
-            },
-            {
-                "id": 4,
-                "title": "Observe Utrecht",
-                "country": "Netherlands",
-                "type": "bus",
-                "description": "Utrecht is famous for The Dom Tower, a historic bell tower dating back to the 14th century. Also, the city is famous for The Treaty of Utrecht, one of the first significant international peace negotiations at the end of the 18th century.",
-                "img": "utrechtPreview.jpg",
-                "nights": null,
-                "startDate": "",
-                "endDate": "",
-                "cost": 40,
-                "activities": [
-                    "Sightseeing Utrecht 10 $",
-                    "Schuttevaer Boat Cruise 26 $",
-                    "Dom Tower 13 $",
-                    "Orchid Farm 32 $"
-                ],
-                "createdAt": "2021-03-16T14:20:19.588Z",
-                "updatedAt": "2021-03-16T14:20:19.588Z"
-            },
-            {
-                "id": 5,
-                "title": "Lofoten Fjords",
-                "country": "Norway",
-                "type": "railway",
-                "description": "Lofoten is a mecca for hiking, climbing, fishing, kayaking, skiing, Arctic surfing (in the summer AND winter), and cycling. You can also go horseback riding under the northern lights in Lofoten! Or the midnight sun, if you're visiting in the summer.",
-                "img": "lofotenPreview.jpg",
-                "nights": null,
-                "startDate": "",
-                "endDate": "",
-                "cost": 50,
-                "activities": [
-                    "Lofoten Panoramic Tour 76 $",
-                    "Hiking in Lofoten 80 $",
-                    "Dom Tower 13 $",
-                    "Observing the Aurora Borealis 100 $"
-                ],
-                "createdAt": "2021-03-16T15:00:38.176Z",
-                "updatedAt": "2021-03-16T15:00:38.176Z"
-            },
+            // {
+            //     "id": 1,
+            //     "title": "Vibrant Dominicana Vacation",
+            //     "country": "Dominicana",
+            //     "type": "air",
+            //     "description": "This country is famous for its beaches that Columbus himself admired centuries ago, medieval buildings and original rum.\nYou should not miss Santo Domingo - the Dominican capital. One of the well known Dominican resorts is Punta Cana.",
+            //     "img": "dominicanaPreview.jpg",
+            //     "nights": null,
+            //     "startDate": "2021-06-12",
+            //     "endDate": "2021-06-22",
+            //     "cost": 110,
+            //     "activities": [
+            //         "Humpback Whale Watching 70 $",
+            //         "Jeep Safari 4x4 Punta Cana 150 $",
+            //         "Bay of the Eagles 90 $",
+            //         "Beach Sightseeing Point 35 $"
+            //     ],
+            //     "createdAt": "2021-03-16T08:51:45.852Z",
+            //     "updatedAt": "2021-03-16T08:51:45.852Z"
+            // },
+            // {
+            //     "id": 2,
+            //     "title": "Weekend in Berling",
+            //     "country": "Germany",
+            //     "type": "bus",
+            //     "description": "Country of football, best cars, great beer. Simple and delicious cuisine, world-famous pedantry and German quality, driving rock music, delightful museums, ideal roads and noisy festivals.",
+            //     "img": "berlinPreview.jpg",
+            //     "nights": null,
+            //     "startDate": null,
+            //     "endDate": null,
+            //     "cost": 35,
+            //     "activities": [
+            //         "Sachsenhausen Memorial Walking Tour 10 $",
+            //         "1-Hour City Tour by Boat with Guaranteed Seating 15 $"
+            //     ],
+            //     "createdAt": "2021-03-16T14:03:33.375Z",
+            //     "updatedAt": "2021-03-16T14:03:33.375Z"
+            // },
+            // {
+            //     "id": 3,
+            //     "title": "Vatican Tours",
+            //     "country": "Italy",
+            //     "type": "bus",
+            //     "description": "Benvenuto! An Italy tour is the best way to experience your next vacation to Italy. Whether you want to trace history in Rome, taste wines in Tuscany, shop in Milan, drive the scenic Amalfi Coast, or explore the canals of Venice.",
+            //     "img": "vaticanPreview.jpg",
+            //     "nights": null,
+            //     "startDate": "",
+            //     "endDate": "",
+            //     "cost": 20,
+            //     "activities": [
+            //         "Colosseum & Ancient Rome Tour with Roman Forum & Palatine Hill 40 $",
+            //         "Full-Day Combo: Complete Vatican Museums, Sistine Chapel & Colosseum 56 $",
+            //         "Pompeii & Mt. Vesuvius Volcano Day Trip from Rome 39 $"
+            //     ],
+            //     "createdAt": "2021-03-16T14:13:15.842Z",
+            //     "updatedAt": "2021-03-16T14:13:15.842Z"
+            // },
+            // {
+            //     "id": 4,
+            //     "title": "Observe Utrecht",
+            //     "country": "Netherlands",
+            //     "type": "bus",
+            //     "description": "Utrecht is famous for The Dom Tower, a historic bell tower dating back to the 14th century. Also, the city is famous for The Treaty of Utrecht, one of the first significant international peace negotiations at the end of the 18th century.",
+            //     "img": "utrechtPreview.jpg",
+            //     "nights": null,
+            //     "startDate": "",
+            //     "endDate": "",
+            //     "cost": 40,
+            //     "activities": [
+            //         "Sightseeing Utrecht 10 $",
+            //         "Schuttevaer Boat Cruise 26 $",
+            //         "Dom Tower 13 $",
+            //         "Orchid Farm 32 $"
+            //     ],
+            //     "createdAt": "2021-03-16T14:20:19.588Z",
+            //     "updatedAt": "2021-03-16T14:20:19.588Z"
+            // },
+            // {
+            //     "id": 5,
+            //     "title": "Lofoten Fjords",
+            //     "country": "Norway",
+            //     "type": "railway",
+            //     "description": "Lofoten is a mecca for hiking, climbing, fishing, kayaking, skiing, Arctic surfing (in the summer AND winter), and cycling. You can also go horseback riding under the northern lights in Lofoten! Or the midnight sun, if you're visiting in the summer.",
+            //     "img": "lofotenPreview.jpg",
+            //     "nights": null,
+            //     "startDate": "",
+            //     "endDate": "",
+            //     "cost": 50,
+            //     "activities": [
+            //         "Lofoten Panoramic Tour 76 $",
+            //         "Hiking in Lofoten 80 $",
+            //         "Dom Tower 13 $",
+            //         "Observing the Aurora Borealis 100 $"
+            //     ],
+            //     "createdAt": "2021-03-16T15:00:38.176Z",
+            //     "updatedAt": "2021-03-16T15:00:38.176Z"
+            // },
             
 
         ]
 
-        this._accomodation = [
+        this._accommodation = [
             {
                 "id": 1,
                 "type": "resort",
@@ -413,9 +413,13 @@ export default class TourStore {
             }
         ]
         
-        this._selectedTour = {};
-
-
+        this._countries = ['Germany', 'Italy', 'Dominicana', 'Norway', 'Netherlands', 'Show all tours'];
+        this._selectedCountry = {};
+        this._types = [];
+        this._selectedType = {};
+        this._page = 1;
+        this._totalCount = 0;
+        this._limit = 3;
 
         makeAutoObservable(this);
     }
@@ -423,22 +427,55 @@ export default class TourStore {
     setTours(tours) {
         this._tours = tours;
     }
-    setAccoms(accoms) {
-        this._accoms = accoms;
+    setAccomms(accommodation) {
+        this._accommodation = accommodation;
     }
 
-    setSelectedTour(tour) {
-        this._selectedTour = tour;
+    setSelectedCountry(country) {
+        this.setPage(1);
+        this._selectedCountry = country;
+    }
+    setSelectedType(type) {
+        this.setPage(1);
+        this._selectedType = type;
     }
 
-    get Tours() {
+    setCountries(country) {
+        this._countries = country;
+    }
+    setTypes(type) {
+        this._types = type;
+    }
+    setPage(page) {
+        this._page = page;
+    }
+    setTotalCount(count) {
+        this._totalCount = count;
+    }
+    get tours() {
         return this._tours;
     }
-    get Accoms() {
-        return this._tours;
+    get accomms() {
+        return this._accommodation;
+    }
+    get selectedCountry() {
+        return this._selectedCountry;
     }
 
-    get selectedTour() {
-        return this._selectedTour;
+    get countries() {
+        return this._countries;
+    }
+    get types() {
+        return this._types;
+    }
+
+    get limit() {
+        return this._limit;
+    }
+    get page() {
+        return this._page;
+    }
+    get totalCount() {
+        return this._totalCount;
     }
 }
