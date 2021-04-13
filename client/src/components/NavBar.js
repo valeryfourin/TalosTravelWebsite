@@ -4,7 +4,7 @@ import {Context} from '../index';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import {useHistory, NavLink} from 'react-router-dom';
-import { ADMIN_ROUTE, LOGIN_ROUTE, OFFERS_ROUTE } from '../utils/consts';
+import { ACCOUNT_ROUTE, ADMIN_ROUTE, LOGIN_ROUTE, OFFERS_ROUTE } from '../utils/consts';
 import {observer} from "mobx-react-lite";
 import Logo from './Logo';
 import VioletButton from './VioletButton';
@@ -32,10 +32,18 @@ const NavBar = observer(() => {
           {user.isAuth ?
             
             <Nav className="d-flex align-items-end">
+              {user.role == 'ADMIN' 
+              ?
               <VioletButton  
                 style={{height:'auto', marginLeft: '20px', marginBottom: '2px', width: '100px'}}
                 onClick={() => history.push(ADMIN_ROUTE)} 
                 text="Admin"/>
+              :
+              <VioletButton  
+                style={{height:'auto', marginLeft: '20px', marginBottom: '2px', width: '100px'}}
+                onClick={() => history.push(ACCOUNT_ROUTE)} 
+                text="Account"/>
+              }
               <VioletButton  
                 style={{height:'auto', marginLeft: '20px', marginBottom: '2px', width: '110px'}} 
                 onClick={() => logOut()} 

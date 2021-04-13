@@ -18,7 +18,7 @@ export const createTour = async (tour) => {
 
 export const fetchTours = async (country) => {
     const {data} = await $host.get('api/tour', {params: {
-        country 
+        country
     }});
     return data;
 }

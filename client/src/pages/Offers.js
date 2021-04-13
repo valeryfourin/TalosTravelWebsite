@@ -7,7 +7,7 @@ import SearchBar from '../components/SearchBar';
 import { observer } from 'mobx-react-lite';
 import { Context } from '../index';
 import { fetchAccomms, fetchTours } from '../http/tourAPI';
-import Pages from '../components/Pages';
+// import Pages from '../components/Pages';
 
 
 const Offers = observer(() => {
@@ -21,11 +21,10 @@ const Offers = observer(() => {
     fetchAccomms().then(data => tour.setAccomms(data))
   }, []);
   
-  
-  // console.log(tour.selectedCountry.country)
     useEffect(() => {
-      fetchTours( tour.selectedCountry ).then(data => { 
+      fetchTours( tour.selectedCountry).then(data => { 
         tour.setTours(data)
+        tour.setTotalCount(data.length)
       })
     }, [tour.selectedCountry,])
 

@@ -5,9 +5,10 @@ import {Button, Container, Form, Row} from 'react-bootstrap';
 import {NavLink, useHistory, useLocation} from 'react-router-dom';
 import Card from "react-bootstrap/Card"
 import { LOGIN_ROUTE, OFFERS_ROUTE, REGISTRATION_ROUTE } from '../utils/consts';
-import { login, registration } from '../http/userAPI';
+import { fetchUser, login, registration } from '../http/userAPI';
 import { Context } from '../index';
 import { observer } from 'mobx-react-lite';
+import VioletButton from '../components/VioletButton';
 
 
 const Auth = observer(() => {
@@ -32,12 +33,17 @@ const Auth = observer(() => {
       }
         user.setUser(user);
         user.setIsAuth(true);
+        user.setEmail(email);
+        fetchUser(user.email).then(data => {user.setRole(data[0].role)})
+        
         history.push(OFFERS_ROUTE);
     } catch (e) {
       alert(e.response.data.message)
     }
-  
   } 
+
+  
+
   return (
     <Container 
         className="form-container d-flex justify-content-center align-items-center"
@@ -49,7 +55,7 @@ const Auth = observer(() => {
             className="mt-3"
             placeholder="Please input your email..."
             type="email"
-            value={email}
+            value={email} 
             onChange={e => setEmail(e.target.value)}
             required
           />
@@ -71,13 +77,11 @@ const Auth = observer(() => {
               Have an account?  <NavLink to={LOGIN_ROUTE} className="p-0 d-inline">Sign in!</NavLink>
             </div>
             }
-            <Button
-                className="outline-primary"
-                variant="outline-primary" 
+            <VioletButton
+              style={{height:'auto'}}
                 onClick={clickAuth}
-            >
-              Enter
-            </Button>
+                text='Enter'
+            />
           </Row>
         </Form>
       </Card>

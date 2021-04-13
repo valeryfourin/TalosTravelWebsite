@@ -30,6 +30,28 @@ class UserController {
         return res.json({token});
     }
 
+    async getUsers(req, res, next) {
+
+        let {email} = req.query;
+        let users;
+        if (email) {
+            users = await User.findAll({where: {email}});
+        } else {
+            users = await User.findAll();
+        }
+
+        return res.json(users);
+    }
+
+    async getOneUser(req, res) { 
+        const {id} = req.params;
+        const user = await User.findOne(
+            {where: {id}}
+        );
+
+        return res.json(user);
+    }
+
     async login(req, res, next) {
         const {email, password} = req.body;
         const user = await User.findOne({where: {email}});
@@ -42,7 +64,6 @@ class UserController {
         }
         const token = generateJwt(user.id, user.email, user.role);
         return res.json({token});
-
     }
 
     async check(req, res, next) {

@@ -1,14 +1,21 @@
 // import { observer } from 'mobx-react-lite';
-// import { useContext } from 'react';
-// import {Context} from '../index';
+import { useContext, useEffect } from 'react';
+import {Context} from '../index';
 
 import LaunchModal from './modals/TourItemModal';
 import '../styles/TourItem.scss';
 import {  Card, Col, Row, Image} from 'react-bootstrap';
 import VioletButton from './VioletButton';
+import { fetchUser } from '../http/userAPI';
 
 const TourItem = ({tour}) => {
-    // const {tour} = useContext(Context);
+    const {user} = useContext(Context);
+    function checkAuth() {
+        if (user.isAuth) alert(user.email)
+        else alert('not logged')
+    }
+    
+
     return (
         <Col >
             <Card className="tour-card">
@@ -27,8 +34,9 @@ const TourItem = ({tour}) => {
                         <Row className="justify-content-around">
                             <LaunchModal tour={tour}/>
                             <VioletButton 
-                                text="Book now!">
-                            </VioletButton>
+                                text="Book now!"
+                                onClick={checkAuth}
+                            />
                         </Row>
                     </div>
                 </div>

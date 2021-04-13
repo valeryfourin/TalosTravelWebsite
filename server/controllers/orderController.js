@@ -1,18 +1,15 @@
-const { Tour } = require("../models/models");
+const { Order } = require("../models/models");
 const ApiError = require("../error/ApiError");
 
-class TourController {
+class OrderController { 
     async create(req, res, next) {
         try {
             const {title, country, description, img, cost, type, activities} = req.body;
-            // const {img} = req.files;
-            // let fileName = uuid.v4() + ".jpg";
-            // img.mv(path.resolve(__dirname, '..', 'static', filename));
 
-            const tour = await Tour.create({title, country, description, img, cost, type, activities});
+            const order = await Order.create({title, country, description, img, cost, type, activities});
 
 
-            return res.json(tour);
+            return res.json(order);
         } catch (e) {
             next(ApiError.badRequest(e.message));
         }
@@ -28,7 +25,7 @@ class TourController {
         page = page || 1;
         limit = limit || 9;
         let offset = page * limit - limit
-        let tours;
+        let order;
         if (!country && !type && !startDate && !nights) {
             tours = await Tour.findAll({limit, offset});
         }
@@ -44,34 +41,35 @@ class TourController {
          if (country && type && startDate && !nights) {
             tours = await Tour.findAll({where:{country, type}, limit, offset});
         }
+        
          if (country && type && startDate && nights) {
             tours = await Tour.findAll({where:{country, type}, limit, offset});
         }
         
-        return res.json(tours);
+        return res.json(order);
         
     }
 
     async getOne(req, res) { 
         const {id} = req.params;
-        const tour = await Tour.findOne(
+        const order = await Order.findOne(
             {where: {id}}
         );
 
-        return res.json(tour);
+        return res.json(order);
     }
     
     async delete(req, res) { // доробити метод
         try {
             const {id} = req.params;
-            const tour = await Tour.delete(
+            const order = await Order.delete(
                 {where: {id}}
             );
-            return res.json(tour);
+            return res.json(order);
         } catch (e) {
         next(ApiError.badRequest(e.message));
         }
     }
 }
 
-module.exports = new TourController();
+module.exports = new OrderController();
