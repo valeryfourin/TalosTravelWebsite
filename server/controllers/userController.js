@@ -27,7 +27,10 @@ class UserController {
         const account = await Account.create({userId: user.id});
         const token = generateJwt(user.id, user.email, user.role);
         
-        return res.json({token});
+        // const userRole = user.role;
+        // return res.json({token, userRole});
+        
+        // return res.json({token});
     }
 
     async getUsers(req, res, next) {
@@ -36,7 +39,7 @@ class UserController {
         let users;
         if (email) {
             users = await User.findAll({where: {email}});
-        } else {
+        } else { 
             users = await User.findAll();
         }
 
@@ -63,12 +66,17 @@ class UserController {
             return next(ApiError.internal("Password is not correct"));
         }
         const token = generateJwt(user.id, user.email, user.role);
+        
+        // const role = user.role;
+        // return res.json({token, role});
         return res.json({token});
     }
 
     async check(req, res, next) {
         const token = generateJwt(req.user.id, req.user.email, req.user.role);
-        return res.json({token});
+        const role = req.user.role;
+        return res.json({token, role});
+        // return res.json({token});
     }
 }
 

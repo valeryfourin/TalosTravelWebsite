@@ -10,6 +10,9 @@ import DateRangePicker from '@wojtekmaj/react-daterange-picker';
 const SearchBar = observer(() => {
     
     const [value, onChange] = useState([new Date(), new Date()]);
+    // function show() {
+    //     console.log(value[0])
+    // }
     return (
         <Row className="search-bar ">
             <InputGroup  className="mb-3 input-group">
@@ -24,7 +27,7 @@ const SearchBar = observer(() => {
                 
                 <GuestsCount className="input-item"/>
 
-                <Button variant="outline-secondary" id="find-btn" className="input-item"><h6>Search!</h6></Button>
+                <Button variant="outline-secondary" id="find-btn"  className="input-item"><h6>Search!</h6></Button>
 
             </InputGroup>
         </Row>

@@ -4,6 +4,8 @@ export default class UserStore {
     constructor() {
         this._isAuth = false;
         this._user = {};
+        
+        this._users = [];
         this._id = 0;
         this._role = "";
         this._email = "";
@@ -11,11 +13,11 @@ export default class UserStore {
         makeAutoObservable(this);
     }
 
-    // setToken( ) {
-    //     if 
-    // }
     setUser(user) {
         this._user = user;
+    }
+    setUsers(users) {
+        this._users = users;
     }
     setIsAuth(bool) {
         this._isAuth = bool;
@@ -29,6 +31,9 @@ export default class UserStore {
     
     get user() {
         return this._user;
+    }
+    get users() {
+        return this._users;
     }
     get isAuth() {
         return this._isAuth;

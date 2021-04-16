@@ -10,10 +10,10 @@ const CreateTour = observer(({show, onHide, ...props}) => {
     const [title, setTitle] = useState('');
     const [country, setCountry] = useState('');
     const [description, setDescription] = useState('');
-    const [img, setImg] = useState('');
     const [cost, setCost] = useState('');
     const [type, setType] = useState(null);
     const [activities, setActivities] = useState([]);
+    const [file, setFile] = useState(null)
 
     useEffect(() => {
       fetchTours().then(data => tour.setTours(data))
@@ -29,22 +29,23 @@ const CreateTour = observer(({show, onHide, ...props}) => {
     const removeAccommodation = (number) => {
         setAccommodation(accommodation.filter(i => i.number !== number))
     }
+
+    const selectFile = e => {
+      setFile(e.target.files[0])
+    }
     
-    const addTour = () => {
+    const addTour =  () => {
       const formData = new FormData();
       formData.append('title', title);
       formData.append('country', country);
       formData.append('description', description);
-      formData.append('img', img);
+      formData.append('img', file);
       formData.append('cost', `${cost}`);
       formData.append('type', type);
-      formData.append('activities', JSON.stringify(activities));
-      createTour(formData).then(data => onHide())
-    }
+      formData.append('activities', `{ ${activities} }`);
 
-    //   console.log(formData)
-    //   createTour(tourBody).then(data => onHide())
-    // }; 
+      createTour(formData).then(data => { onHide(); console.log(data)})
+    }
 
     return (
         <Modal
@@ -68,6 +69,7 @@ const CreateTour = observer(({show, onHide, ...props}) => {
               onChange={e => setTitle(e.target.value)}
               className="mt-2 mb-2" 
               placeholder={'Input title'}
+              required
               />
             <Dropdown className="mt-2 mb-2"> 
                 <Dropdown.Toggle>{ type == null ? 'Choose type:' : type}</Dropdown.Toggle>
@@ -91,32 +93,36 @@ const CreateTour = observer(({show, onHide, ...props}) => {
               value={country}
               onChange={e => setCountry(e.target.value)}
               className="mt-2 mb-2" 
-              placeholder={'Input country'}/>
+              placeholder={'Input country'}
+              required/>
             <Form.Control 
               value={description}
               onChange={e => setDescription(e.target.value)}
               className="mt-2 mb-2" 
               as="textarea" 
               rows={3} 
-              placeholder={'Input description (max character 900)'}/>
-            <Form.Control 
-              value={img}
-              onChange={e => setImg(e.target.value)}
-              className="mt-2 mb-2" 
-              placeholder={'Input image preview name'}/>
+              placeholder={'Input description (max character 900)'}
+              required/>
+            <Form.Control
+              className="mt-3"
+              type="file"
+              onChange={selectFile}
+              required />
             <Form.Control 
               value={cost}
               onChange={e => setCost(Number(e.target.value))}
               className="mt-2 mb-2" 
               id="numbersOnlyInput"
               placeholder={ cost == '' ? 'Input price per night:' : cost}
-              type="number"/>
+              type="number"
+              required/>
             <Form.Control 
               value={activities}
               onChange={e => setActivities(e.target.value)}
               className="mt-2 mb-2" 
               as="textarea" rows={2} 
-              placeholder={'Input activities (divide with a coma)'}/>
+              placeholder={'Input activities (divide with a coma)'}
+              required/>
             <hr />
             <h4>Accommodation</h4>
             <VioletButton 

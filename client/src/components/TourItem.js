@@ -7,12 +7,17 @@ import '../styles/TourItem.scss';
 import {  Card, Col, Row, Image} from 'react-bootstrap';
 import VioletButton from './VioletButton';
 import { fetchUser } from '../http/userAPI';
+import LaunchBookTourModal from './modals/BookTourModal';
 
 const TourItem = ({tour}) => {
     const {user} = useContext(Context);
     function checkAuth() {
         if (user.isAuth) alert(user.email)
-        else alert('not logged')
+        else alert('You need to be authorized!')
+    }
+
+    function bookTour() {
+        checkAuth()
     }
     
 
@@ -20,7 +25,7 @@ const TourItem = ({tour}) => {
         <Col >
             <Card className="tour-card">
                 <div className="img-container">
-                    <Image src={'./images/tourImages/' + tour.img} className="tour-preview"/>
+                    <Image src={process.env.REACT_APP_API_URL + tour.img} className="tour-preview"/>
                 </div>
                 <div className="tour-card-content">
 
@@ -33,9 +38,9 @@ const TourItem = ({tour}) => {
                         <div style={{textAlign: 'right'}}><h6>{tour.cost}$/day</h6></div>
                         <Row className="justify-content-around">
                             <LaunchModal tour={tour}/>
-                            <VioletButton 
-                                text="Book now!"
-                                onClick={checkAuth}
+                            <LaunchBookTourModal 
+                                tour={tour}
+                                onClick={bookTour}
                             />
                         </Row>
                     </div>

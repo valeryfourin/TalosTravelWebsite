@@ -5,7 +5,7 @@ import {Button, Container, Form, Row} from 'react-bootstrap';
 import {NavLink, useHistory, useLocation} from 'react-router-dom';
 import Card from "react-bootstrap/Card"
 import { LOGIN_ROUTE, OFFERS_ROUTE, REGISTRATION_ROUTE } from '../utils/consts';
-import { fetchUser, login, registration } from '../http/userAPI';
+import { fetchUsers, login, registration } from '../http/userAPI';
 import { Context } from '../index';
 import { observer } from 'mobx-react-lite';
 import VioletButton from '../components/VioletButton';
@@ -22,27 +22,41 @@ const Auth = observer(() => {
 
 
   const clickAuth = async () => {
-    try {
-        let data;
-      if (isLogin) {
-        const data = await login(email, password);
-        console.log(data)
-      } else {
-        const data = await registration(email, password);
-        console.log(data)
-      }
-        user.setUser(user);
-        user.setIsAuth(true);
-        user.setEmail(email);
-        fetchUser(user.email).then(data => {user.setRole(data[0].role)})
+  //     try {
+  //       useEffect(() => {
+  //         check().then(data => {
+      
         
-        history.push(OFFERS_ROUTE);
-    } catch (e) {
-      alert(e.response.data.message)
+  //     }, []);
+  //     } catch (e) {
+  //       alert(e)
+  //     }
+  //     }
+    if (isLogin) {
+      const data = await login(email, password).then( data => {
+        user.setRole(data.dataRole)
+      });
+      console.log(data)
+    } else {
+      const data = await registration(email, password).then( data => {
+        user.setRole(data.dataRole)
+      });
+      console.log(data)
     }
+      user.setUser(user);
+      user.setIsAuth(true);
+      user.setEmail(email);
+      // fetchUsers(user.email).then(data => {user.setRole(data[0].role)})
+      
+      history.push(OFFERS_ROUTE); 
   } 
 
   
+
+  
+
+
+
 
   return (
     <Container 

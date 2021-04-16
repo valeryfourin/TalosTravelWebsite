@@ -16,23 +16,21 @@ const Offers = observer(() => {
   useEffect(() => {
     fetchTours(null).then(data => { 
       tour.setTours(data)
-      tour.setTotalCount(data.length)
     })
     fetchAccomms().then(data => tour.setAccomms(data))
   }, []);
   
-    useEffect(() => {
-      fetchTours( tour.selectedCountry).then(data => { 
-        tour.setTours(data)
-        tour.setTotalCount(data.length)
-      })
-    }, [tour.selectedCountry,])
+  useEffect(() => {
+    fetchTours(tour.selectedCountry).then(data => { 
+      tour.setTours(data)
+    })
+  }, [tour.selectedCountry,])
 
-    useEffect(() => {
-      fetchTours( null ).then(data => { 
-        tour.setTours(data)
-      })
-    }, [tour.selectedCountry === 'Show all tours',])
+  useEffect(() => {
+    fetchTours( null ).then(data => { 
+      tour.setTours(data)
+    })
+  }, [tour.selectedCountry === 'Show all tours',])
   
 
   return (

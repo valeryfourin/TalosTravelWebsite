@@ -1,10 +1,41 @@
 
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { Image, Modal } from "react-bootstrap";
+import { Context } from '../..';
 import VioletButton from '../VioletButton';
 
-const TourModal = (props) => {
+const BookTourModal = (props) => {
+
+    const {tour} = useContext(Context);
+    const [title, setTitle] = useState('');
+    const [country, setCountry] = useState('');
+    const [description, setDescription] = useState('');
+    // const [img, setImg] = useState('');
+    const [cost, setCost] = useState('');
+    const [type, setType] = useState(null);
+    const [activities, setActivities] = useState([]);
+    const [file, setFile] = useState(null)
     let activitiesArray = String(props.tour.activities).split(',')
+
+
+    const addOrder =  () => {
+      console.log(title)
+      console.log(country)
+      console.log(description)
+      console.log(cost)
+      console.log(type)
+      console.log(activities)
+      console.log(file)
+      const formData = new FormData();
+      formData.append('title', title);
+      formData.append('country', country);
+      formData.append('description', description);
+      // formData.append('img', img);
+      formData.append('img', file);
+      formData.append('cost', `${cost}`);
+      formData.append('type', type);
+      formData.append('activities', `{ ${activities} }`);
+    }
     
     return (
       <Modal
@@ -15,17 +46,13 @@ const TourModal = (props) => {
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-          <h5 className="tour-title">{props.tour.title}</h5>
+          <h5 className="tour-title">Booking tour {props.tour.title}</h5>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
         <div className=""><b>Country: </b>{props.tour.country}</div>
         <div className="mb-3"><b>Type: </b>{props.tour.type} tour</div>
         <div className="tour-description-container">
-            <div className="modal-img-container">
-                    <Image src={process.env.REACT_APP_API_URL + props.tour.img} style={{margin: 'auto'}} className="w-100 tour-preview"/>
-                </div>
-            <div className="mt-3">{props.tour.description}</div>
             <br/>
             <div className=""><h6>Available activities:</h6> 
             <div>
@@ -50,7 +77,7 @@ const TourModal = (props) => {
     );
   }
   
-  const LaunchModal = (props) => {
+  const LaunchBookTourModal = (props) => {
 
     const [modalShow, setModalShow] = React.useState(false);
   
@@ -58,10 +85,10 @@ const TourModal = (props) => {
       <>
         <VioletButton 
           onClick={() => setModalShow(true)}
-          text="Learn more..."
+          text="Book now!"
           />
   
-        <TourModal
+        <BookTourModal
           {...props}
           show={modalShow}
           onHide={() => setModalShow(false)}
@@ -69,4 +96,4 @@ const TourModal = (props) => {
       </>
     );
 }
-export default LaunchModal;
+export default LaunchBookTourModal;

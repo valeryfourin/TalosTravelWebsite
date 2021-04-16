@@ -1,9 +1,14 @@
-import React from 'react';
+import { observer } from 'mobx-react-lite';
+import React, { useContext, useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
+import { Context } from '../../index';
 // import '../styles/Admin.scss';
 // import VioletButton from '../VioletButton'
 
-const DeleteTour = ({show, onHide, ...props}) => {
+const DeleteTour = observer(({show, onHide, ...props}) => {
+  
+  const {tour} = useContext(Context);
+  const [id, setId] = useState('');
     return (
         <Modal
       show={show}
@@ -21,7 +26,7 @@ const DeleteTour = ({show, onHide, ...props}) => {
       <Modal.Body>
         <Form>
             <Form.Control 
-                placeholder={'Input title'}
+                placeholder={'Input id'}
             />
         </Form>
       </Modal.Body>
@@ -39,7 +44,7 @@ const DeleteTour = ({show, onHide, ...props}) => {
       </Modal.Footer>
     </Modal>
   );
-}
+});
 
 export default DeleteTour;
 

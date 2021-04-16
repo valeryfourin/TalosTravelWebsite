@@ -7,7 +7,7 @@ const User = sequelize.define( 'user', {
     number: {type: DataTypes.BIGINT, unique: true},
     password: {type: DataTypes.STRING, unique: true},
     role: {type: DataTypes.STRING, defaultValue: "USER"},
-    // previousOrders: {type: DataTypes.ARRAY(DataTypes.STRING), defaultValue: "none"},
+    previousOrders: {type: DataTypes.STRING, defaultValue: "none"},
 });
 
 const Tour = sequelize.define( 'tour', {
@@ -51,7 +51,7 @@ const Accommodation = sequelize.define( 'accommodation', {
 
 const Order = sequelize.define( 'order', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    status: {type: DataTypes.STRING, allowNull: false},
+    status: {type: DataTypes.STRING, defaultValue: "Waiting"},
     tourId: {type: DataTypes.INTEGER, allowNull: false},
     userId: {type: DataTypes.INTEGER, allowNull: false},
     nights: {type: DataTypes.INTEGER},
@@ -59,7 +59,7 @@ const Order = sequelize.define( 'order', {
     endDate: {type: DataTypes.STRING},
     numberOfPeople: {type: DataTypes.INTEGER},
     totalPrice: {type: DataTypes.INTEGER},
-    paymentStatus: {type: DataTypes.STRING}
+    paymentStatus: {type: DataTypes.STRING, defaultValue: "Paid"}
 });
 
 const Payment = sequelize.define( 'payment', {

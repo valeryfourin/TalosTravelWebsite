@@ -3,6 +3,7 @@
     cursor: pointer;
     max-height: 400px;
     overflow: auto;
+    -ms-overflow-style: none; 
     text-align: center;
 }
 

@@ -3,7 +3,7 @@ const router = new Router();
 const tourController = require('../controllers/tourController');
 const checkRole = require('../middleware/checkRoleMiddleware');
 
-router.post('/', checkRole("ADMIN"), tourController.create);
+router.post('/', checkRole("ADMIN"),  tourController.create);
 router.get('/', tourController.getAll);
 router.get('/:id', tourController.getOne);
 router.delete('/', tourController.delete)

@@ -16,6 +16,11 @@ export const createTour = async (tour) => {
     return data;
 }
 
+export const deleteTour = async (tour) => {
+    const {data} = await $authHost.delete('api/tour', tour);
+    return data;
+}
+
 export const fetchTours = async (country) => {
     const {data} = await $host.get('api/tour', {params: {
         country
