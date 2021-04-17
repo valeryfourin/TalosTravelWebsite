@@ -1,3 +1,3 @@
 # TalosTravelWebsite
-server: npm run dev
+server: npm run dev  
 client: npm start
