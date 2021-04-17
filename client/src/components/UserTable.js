@@ -12,7 +12,6 @@ const TourTable = observer(() => {
     <tr>
       <th>id</th>
       <th>email</th>
-      <th>password</th>
       <th>role</th>
       <th>previous orders</th>
     </tr>
@@ -22,7 +21,6 @@ const TourTable = observer(() => {
                 <tr key={user.id}>
                     <td>{user.id}</td>
                     <td>{user.email}</td>
-                    <td>{user.password}</td>
                     <td>{user.role}</td>
                     <td>{user.previousOrders}</td>
                 </tr>

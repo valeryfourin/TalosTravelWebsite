@@ -2,17 +2,17 @@
 import { observer } from 'mobx-react-lite';
 import React, { useContext, useEffect, useState } from 'react';
 import { Button, Collapse } from 'react-bootstrap';
-import { fetchTours } from '../http/tourAPI';
+import { fetchOrders } from '../http/orderAPI';
 import { Context } from '../index';
-import TourTable from './TourTable';
+import OrderTable from './OrderTable';
 
 const ShowUsersButton = observer(() => {
     const [open, setOpen] = useState(false);
-    const {tour} = useContext(Context);
+    const {order} = useContext(Context);
   
     useEffect(() => {
-      fetchTours().then(data => { 
-        tour.setTours(data)
+      fetchOrders().then(data => { 
+        order.setOrders(data)
       })
     }, []);
 
@@ -29,7 +29,7 @@ const ShowUsersButton = observer(() => {
         </Button>
         <Collapse in={open}>
           <div id="example-collapse-text">
-            <TourTable/>
+            <OrderTable/>
           </div>
         </Collapse>
       </>

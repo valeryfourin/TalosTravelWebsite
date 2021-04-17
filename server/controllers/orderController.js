@@ -17,13 +17,15 @@ class OrderController {
         //const tours = await Tour.findAll();
         //return res.json(tours);
 
-        let {status, page, limit} = req.query;
+        let {status, userId, page, limit} = req.query;
         page = page || 1;
         limit = limit || 9;
         let offset = page * limit - limit
         let orders;
-         if (status) {
+        if (status) {
             orders = await Order.findAll({where:{status}});
+        } else if (userId) {
+            orders = await Order.findAll({where:{userId}});
         } else {
             orders = await Order.findAll();
         }

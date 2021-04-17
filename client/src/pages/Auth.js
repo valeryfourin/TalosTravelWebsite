@@ -22,41 +22,25 @@ const Auth = observer(() => {
 
 
   const clickAuth = async () => {
-  //     try {
-  //       useEffect(() => {
-  //         check().then(data => {
-      
-        
-  //     }, []);
-  //     } catch (e) {
-  //       alert(e)
-  //     }
-  //     }
     if (isLogin) {
       const data = await login(email, password).then( data => {
         user.setRole(data.dataRole)
         user.setId(data.dataId);
+        user.setEmail(data.dataEmail);
       });
     } else {
       const data = await registration(email, password).then( data => {
         user.setRole(data.dataRole)
         user.setId(data.dataId);
+        user.setEmail(data.dataEmail);
       });
     }
       user.setUser(user);
       user.setIsAuth(true); 
-      user.setEmail(email);
       // fetchUsers(user.email).then(data => {user.setRole(data[0].role)})
       
       history.push(OFFERS_ROUTE); 
   } 
-
-  
-
-  
-
-
-
 
   return (
     <Container 

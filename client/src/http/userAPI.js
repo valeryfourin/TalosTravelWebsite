@@ -7,7 +7,8 @@ export const registration = async (email, password) => {
     let dataToken = jwtDecode(data.token);
     let dataRole = dataToken.role;
     let dataId = dataToken.id;
-    return {dataToken, dataRole, dataId};
+    let dataEmail = dataToken.email;
+    return {dataToken, dataRole, dataId, dataEmail};
     // return jwtDecode(data.token);
 }
 
@@ -17,7 +18,8 @@ export const login = async (email, password) => {
     let dataToken = jwtDecode(data.token);
     let dataRole = dataToken.role;
     let dataId = dataToken.id;
-    return {dataToken, dataRole, dataId};
+    let dataEmail = dataToken.email;
+    return {dataToken, dataRole, dataId, dataEmail};
     
     // return jwtDecode(data.token);
 }
@@ -28,7 +30,8 @@ export const check = async () => {
     let dataToken = jwtDecode(data.token);
     let dataRole = dataToken.role;
     let dataId = dataToken.id;
-    return {dataToken, dataRole, dataId};
+    let dataEmail = dataToken.email;
+    return {dataToken, dataRole, dataId, dataEmail};
     
     // return jwtDecode(data.token);
 }

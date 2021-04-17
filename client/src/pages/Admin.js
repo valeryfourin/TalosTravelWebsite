@@ -4,7 +4,6 @@ import '../styles/Admin.scss';
 import VioletButton from '../components/VioletButton';
 import CreateTour from '../components/modals/CreateTour';
 import EditTour from '../components/modals/EditTour';
-import DeleteTour from '../components/modals/DeleteTour';
 import ShowToursButton from '../components/ShowToursButton';
 import ShowUsersButton from '../components/ShowUsersButton';
 import ShowOrdersButton from '../components/ShowOrdersButton';
@@ -17,9 +16,9 @@ import { OFFERS_ROUTE } from '../utils/consts';
 const Admin = () => {
   const history = useHistory();
   const {user} = useContext(Context);
+  const {order} = useContext(Context);
   const [createTourVisible, setCreateTourVisible] = useState(false);
   const [editTourVisible, setEditTourVisible] = useState(false);
-  const [deleteTourVisible, setDeleteTourVisible] = useState(false);
 
   useEffect(() => {
     check().then(data => {
@@ -38,13 +37,9 @@ const Admin = () => {
       <VioletButton 
         onClick={() => setEditTourVisible(true)}
         text="Edit tour"/>
-      <VioletButton 
-        onClick={() => setDeleteTourVisible(true)}
-        text="Delete tour"/>
       
     <CreateTour show={createTourVisible} onHide={() => setCreateTourVisible(false)}/>
     <EditTour show={editTourVisible} onHide={() => setEditTourVisible(false)}/>
-    <DeleteTour show={deleteTourVisible} onHide={() => setDeleteTourVisible(false)}/>
 
     <br/>
     <br/>

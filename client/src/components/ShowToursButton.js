@@ -8,13 +8,13 @@ import TourTable from './TourTable';
 
 const ShowUsersButton = observer(() => {
     const [open, setOpen] = useState(false);
-    const {tour} = useContext(Context);
+    // const {tour} = useContext(Context);
   
-    useEffect(() => {
-      fetchTours().then(data => { 
-        tour.setTours(data)
-      })
-    }, []);
+    // useEffect(() => {
+    //   fetchTours().then(data => { 
+    //     tour.setTours(data)
+    //   })
+    // }, []);
 
     return (
       <>

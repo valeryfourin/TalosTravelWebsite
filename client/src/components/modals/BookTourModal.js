@@ -1,6 +1,7 @@
 
 import DateRangePicker from '@wojtekmaj/react-daterange-picker';
 import React, { useContext, useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
 import { Form, Image, Modal } from "react-bootstrap";
 import { Context } from '../..';
 import { createOrder } from '../../http/orderAPI';
@@ -40,16 +41,31 @@ const BookTourModal = observer((props) => {
       // nights = evaluateNights(startDate, endDate)
     }, [valueCalendar]);
     
-    console.log(peopleNumber)
 
-    // console.log('..................................')
     useEffect(() => {
-      // console.log(totalPrice)
-      // setTotalPrice(evaluatePrice(1, startDate, endDate))
       totalPrice = evaluatePrice(props.tour.cost, startDate, endDate, peopleNumber)
-    }, [valueCalendar, nights, peopleNumber]);
+    }, [valueCalendar,nights,peopleNumber]);
+    // useEffect(() => {
+    //   totalPrice = evaluatePrice(props.tour.cost, startDate, endDate, peopleNumber)
+    // }, [nights]);
+    // useEffect(() => {
+    //   totalPrice = evaluatePrice(props.tour.cost, startDate, endDate, peopleNumber)
+    // }, [peopleNumber]);
     
-    // console.log(totalPrice)
+    const priceNumber = document.createElement('div');
+    useEffect(() => {
+      ReactDOM.render(<h6>Total price: {totalPrice} $</h6>, priceNumber)
+    })
+
+    function showEvaluatedPrice(e) {
+      let totalPriceContainer = document.getElementById("totalPrice");
+      if (totalPriceContainer.hasChildNodes()) {
+        totalPriceContainer.removeChild(totalPriceContainer.childNodes[0]);
+        totalPriceContainer.appendChild(priceNumber)
+      } else {
+        totalPriceContainer.appendChild(priceNumber)
+      }
+    }
 
     const addOrder =  () => {
       console.log(peopleNumber)
@@ -59,18 +75,17 @@ const BookTourModal = observer((props) => {
       console.log(userId)
       console.log(tourId)
       console.log(totalPrice)
-      // const formData = new FormData();
-      // formData.append('title', title);
-      // formData.append('country', country);
-      // formData.append('description', description);
-      // // formData.append('img', img);
-      // formData.append('img', file);
-      // formData.append('cost', `${cost}`);
-      // formData.append('type', type);
-      // formData.append('activities', `{ ${activities} }`);
 
-      
-      // createOrder(formData).then(data => { props.onHide(); console.log(data)})
+      const formData = new FormData();
+      formData.append('numberOfPeople', peopleNumber);
+      formData.append('startDate', startDate);
+      formData.append('endDate', endDate);
+      formData.append('nights', nights);
+      formData.append('userId', userId);
+      formData.append('tourId', tourId);
+      formData.append('totalPrice', `${totalPrice}`);
+
+      createOrder(formData).then(data => { props.onHide(); console.log(data)})
     }
     
     return (
@@ -90,6 +105,7 @@ const BookTourModal = observer((props) => {
           <Form>
             <div className=""><b>Country: </b>{props.tour.country}</div>
             <div className="mb-3"><b>Type: </b>{props.tour.type} tour</div>
+            <div className="mb-3"><b>Id: </b>{props.tour.id}</div>
             <DateRangePicker 
               className="calendar"
               onChange={setValueCalendar}
@@ -112,7 +128,16 @@ const BookTourModal = observer((props) => {
                 <i>Note: excursions and accommodation are not included in the price!</i>
                 </div>
             </div>
-            <div style={{textAlign: 'right'}}><h6>Total price: {totalPrice} $</h6></div>
+            <VioletButton 
+              id='priceButton' 
+              text='Evaluate price'
+              // onClick={e => {document.getElementById(totalPrice).innerText += totalPriceContainer.innerText}}/>
+              // onClick={e => {document.getElementById("totalPrice").removeChild(totalPriceContainer)}}/>
+               onClick={showEvaluatedPrice}/>
+              
+            <div style={{textAlign: 'right'}} id='totalPrice' ></div>
+            
+
           </Form>
         </Modal.Body>
         <Modal.Footer>

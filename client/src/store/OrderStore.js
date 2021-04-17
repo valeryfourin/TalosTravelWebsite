@@ -3,24 +3,16 @@ import {makeAutoObservable} from "mobx";
 export default class OrderStore {
     constructor() {
 
-        this._allOrders = [];
-        this._order = {};
-
+        this._orders = [];
         makeAutoObservable(this);
     }
 
-    setAllOrders(orders) {
-        this._allOrders = orders;
-    }
-    setOrder(order) {
-        this._order = order;
+    setOrders(orders) {
+        this._orders = orders;
     }
 
-    get allOrders() {
-        return this._allOrders;
-    }
-    get order() {
-        return this._order;
+    get orders() {
+        return this._orders;
     }
     
 }

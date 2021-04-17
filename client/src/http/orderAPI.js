@@ -6,9 +6,9 @@ export const createOrder = async (order) => {
     return data;
 }
 
-export const fetchOrders = async (country) => {
+export const fetchOrders = async (country, userId) => {
     const {data} = await $host.get('api/order', {params: {
-        country
+        country, userId
     }});
     return data;
 }
