@@ -20,8 +20,10 @@ const App = observer(() => {
     check().then(data => {
       user.setUser(true);
       user.setIsAuth(true);
+      user.setId(data.dataId);
       user.setRole(data.dataRole);
-      console.log(data.dataRole)
+      console.log(user.role);
+      console.log('id: ' + user.id);
     }).finally(() => setLoading(false))
   }, []);
 

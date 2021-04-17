@@ -6,7 +6,7 @@ export default class UserStore {
         this._user = {};
         
         this._users = [];
-        this._id = 0;
+        this._id = "";
         this._role = "";
         this._email = "";
         this._token = "";
@@ -28,6 +28,9 @@ export default class UserStore {
     setRole(role) {
         this._role = role;
     }
+    setId(id) {
+        this._id = id;
+    }
     
     get user() {
         return this._user;
@@ -43,5 +46,8 @@ export default class UserStore {
     }
     get role() {
         return this._role;
+    }
+    get id() {
+        return this._id;
     }
 }

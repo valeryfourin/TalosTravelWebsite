@@ -35,16 +35,16 @@ const Auth = observer(() => {
     if (isLogin) {
       const data = await login(email, password).then( data => {
         user.setRole(data.dataRole)
+        user.setId(data.dataId);
       });
-      console.log(data)
     } else {
       const data = await registration(email, password).then( data => {
         user.setRole(data.dataRole)
+        user.setId(data.dataId);
       });
-      console.log(data)
     }
       user.setUser(user);
-      user.setIsAuth(true);
+      user.setIsAuth(true); 
       user.setEmail(email);
       // fetchUsers(user.email).then(data => {user.setRole(data[0].role)})
       

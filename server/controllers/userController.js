@@ -30,7 +30,7 @@ class UserController {
         // const userRole = user.role;
         // return res.json({token, userRole});
         
-        // return res.json({token});
+        return res.json({token});
     }
 
     async getUsers(req, res, next) {
@@ -74,9 +74,10 @@ class UserController {
 
     async check(req, res, next) {
         const token = generateJwt(req.user.id, req.user.email, req.user.role);
-        const role = req.user.role;
-        return res.json({token, role});
-        // return res.json({token});
+        // const role = req.user.role;
+        // const id = req.user.id;
+        // return res.json({token, role, id});
+        return res.json({token});
     }
 }
 

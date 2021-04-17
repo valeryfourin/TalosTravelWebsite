@@ -6,46 +6,56 @@ import {Context} from '../../index';
 import VioletButton from '../VioletButton';
 
 const CreateTour = observer(({show, onHide, ...props}) => {
-    const {tour} = useContext(Context);
-    const [title, setTitle] = useState('');
-    const [country, setCountry] = useState('');
-    const [description, setDescription] = useState('');
-    const [cost, setCost] = useState('');
-    const [type, setType] = useState(null);
-    const [activities, setActivities] = useState([]);
-    const [file, setFile] = useState(null)
+  const [validated, setValidated] = useState(false);
 
-    useEffect(() => {
-      fetchTours().then(data => tour.setTours(data))
-      fetchAccomms().then(data => tour.setAccomms(data.rows))
-    }, []);
+  const {tour} = useContext(Context);
+  const [title, setTitle] = useState('');
+  const [country, setCountry] = useState('');
+  const [description, setDescription] = useState('');
+  const [cost, setCost] = useState('');
+  const [type, setType] = useState(null);
+  const [activities, setActivities] = useState([]);
+  const [file, setFile] = useState(null)
 
-    const [accommodation, setAccommodation] = useState([]);
+  useEffect(() => {
+    fetchTours().then(data => tour.setTours(data))
+    fetchAccomms().then(data => tour.setAccomms(data.rows))
+  }, []);
 
-    const addAccommodation = () => {
-        setAccommodation([...accommodation, {type: '', title: '', address: '', description: '', img: '', price: '', stars: '', number: Date.now()}])
+  const [accommodation, setAccommodation] = useState([]);
+
+  const addAccommodation = () => {
+      setAccommodation([...accommodation, {type: '', title: '', address: '', description: '', img: '', price: '', stars: '', number: Date.now()}])
+  }
+
+  const removeAccommodation = (number) => {
+      setAccommodation(accommodation.filter(i => i.number !== number))
+  }
+
+  const selectFile = e => {
+    setFile(e.target.files[0])
+  }
+  
+  const addTour =  (event) => {
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
     }
 
-    const removeAccommodation = (number) => {
-        setAccommodation(accommodation.filter(i => i.number !== number))
-    }
-
-    const selectFile = e => {
-      setFile(e.target.files[0])
-    }
+    setValidated(true);
     
-    const addTour =  () => {
-      const formData = new FormData();
-      formData.append('title', title);
-      formData.append('country', country);
-      formData.append('description', description);
-      formData.append('img', file);
-      formData.append('cost', `${cost}`);
-      formData.append('type', type);
-      formData.append('activities', `{ ${activities} }`);
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('country', country);
+    formData.append('description', description);
+    formData.append('img', file);
+    formData.append('cost', `${cost}`);
+    formData.append('type', type);
+    formData.append('activities', `{ ${activities} }`);
 
-      createTour(formData).then(data => { onHide(); console.log(data)})
-    }
+    createTour(formData).then(data => { onHide(); console.log(data)})
+  }
 
     return (
         <Modal
@@ -62,7 +72,7 @@ const CreateTour = observer(({show, onHide, ...props}) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form>
+        <Form noValidate validated={validated}> 
             
             <Form.Control 
               value={title}

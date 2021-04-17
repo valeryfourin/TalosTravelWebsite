@@ -1,7 +1,11 @@
+.calendar {
+    min-height: 70px;
+}
+
 .react-calendar__tile--active {
     background: #9584b8 !important;
 }
 
 .react-calendar__tile--active:enabled:hover, .react-calendar__tile--active:enabled:focus {
     background: #9584b8 !important;
-}
+} 

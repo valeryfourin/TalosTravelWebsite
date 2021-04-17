@@ -11,27 +11,15 @@ export default class GuestsCount extends React.Component {
     this.state = {
       count: 1
     }
-    
-  }
-  handleNumberChange = (e) => {
-    const number = e.target.value;
-    this.setState({ count: number });
-    this.props.onGetPeopleNumber(this.state.count); 
   }
 
-  incrementClick = () => (e) => {
-    if (this.state.count === 10) { return; }
-    else { 
-      this.setState((state) => { return { count: this.state.count + 1 }}); 
-      this.props.onGetPeopleNumber(this.state.count); 
-    }
+    incrementClick = (data) => (e) => {
+        if (this.state.count === 10) { return; }
+        else { this.setState({ count: this.state.count + 1 }); }
   };
-  decrementClick = () => (e) => {
-    if (this.state.count === 1) { return; }
-    else { 
-      this.setState((state) => { return { count: this.state.count - 1 }}); 
-      this.props.onGetPeopleNumber(this.state.count); 
-    }
+    decrementClick = (data) => (e) => {
+        if (this.state.count === 1) { return; }
+        else { this.setState({ count: this.state.count - 1 }); }
   };
 
   render(){
@@ -42,12 +30,12 @@ export default class GuestsCount extends React.Component {
         </Dropdown.Toggle>
         <Dropdown.Menu className="guest-count-dropdown-content">
           <div className="d-flex flex-row dropdown-content">
-            <p className="number-of-guests-text">Number of guests:</p>
+            <p className="number-of-guests-text"  >Number of guests:</p>
             
             
-            <Button className="operation-btn" onClick={this.decrementClick()}><h6>-</h6></Button>
+            <Button className="operation-btn" onClick={this.decrementClick('data text')}><h6>-</h6></Button>
             <h6 className="m-2">{this.state.count}</h6>
-            <Button className="operation-btn" onClick={this.incrementClick()}><h6>+</h6></Button>
+            <Button className="operation-btn" onClick={this.incrementClick('data text')}><h6>+</h6></Button>
           </div>
           </Dropdown.Menu>
       <Helmet>

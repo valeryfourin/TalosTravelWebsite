@@ -6,8 +6,8 @@ export const registration = async (email, password) => {
     localStorage.setItem('token', data.token);
     let dataToken = jwtDecode(data.token);
     let dataRole = dataToken.role;
-    
-    return {dataToken, dataRole};
+    let dataId = dataToken.id;
+    return {dataToken, dataRole, dataId};
     // return jwtDecode(data.token);
 }
 
@@ -16,7 +16,8 @@ export const login = async (email, password) => {
     localStorage.setItem('token', data.token);
     let dataToken = jwtDecode(data.token);
     let dataRole = dataToken.role;
-    return {dataToken, dataRole};
+    let dataId = dataToken.id;
+    return {dataToken, dataRole, dataId};
     
     // return jwtDecode(data.token);
 }
@@ -26,7 +27,8 @@ export const check = async () => {
     localStorage.setItem('token', data.token);
     let dataToken = jwtDecode(data.token);
     let dataRole = dataToken.role;
-    return {dataToken, dataRole};
+    let dataId = dataToken.id;
+    return {dataToken, dataRole, dataId};
     
     // return jwtDecode(data.token);
 }

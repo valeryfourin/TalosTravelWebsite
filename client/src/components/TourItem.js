@@ -11,14 +11,6 @@ import LaunchBookTourModal from './modals/BookTourModal';
 
 const TourItem = ({tour}) => {
     const {user} = useContext(Context);
-    function checkAuth() {
-        if (user.isAuth) alert(user.email)
-        else alert('You need to be authorized!')
-    }
-
-    function bookTour() {
-        checkAuth()
-    }
     
 
     return (
@@ -38,10 +30,7 @@ const TourItem = ({tour}) => {
                         <div style={{textAlign: 'right'}}><h6>{tour.cost}$/day</h6></div>
                         <Row className="justify-content-around">
                             <LaunchModal tour={tour}/>
-                            <LaunchBookTourModal 
-                                tour={tour}
-                                onClick={bookTour}
-                            />
+                            <LaunchBookTourModal tour={tour}/>
                         </Row>
                     </div>
                 </div>
