@@ -42,17 +42,27 @@ class OrderController {
 
         return res.json(order);
     }
-    
+
+    async update(req, res) { 
+        const {id, status} = req.body;
+        Order.update({status: status}, {where: {id: id}}).then(() => {
+            res.status(200).json('Order with id = ' + id + ' updated successfully')
+        }).catch(err => {
+            console.log(err);
+            res.status(500).json('We failed to update for the reason: ' + err)
+        })
+    }
+
     async delete(req, res) { // доробити метод
-        try {
-            const {id} = req.params;
-            const order = await Order.delete(
-                {where: {id}}
-            );
-            return res.json(order);
-        } catch (e) {
-        next(ApiError.badRequest(e.message));
-        }
+        const id = req.params.id;
+        // let tour = Tour.build({id: id}, { isNewRecord: false })
+        Order.destroy({where: {id: id}}).then(() => {
+            return res.status(200).json('Order with id = ' + id + ' removed successfully');
+           }).catch((err) => {
+            console.log(err);
+            return res.status(500).json('We failed to delete for the reason: ' + err);
+           }); 
+        
     }
 }
 

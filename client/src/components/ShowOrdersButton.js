@@ -8,13 +8,7 @@ import OrderTable from './OrderTable';
 
 const ShowUsersButton = observer(() => {
     const [open, setOpen] = useState(false);
-    const {order} = useContext(Context);
-  
-    useEffect(() => {
-      fetchOrders().then(data => { 
-        order.setOrders(data)
-      })
-    }, []);
+    
 
     return (
       <>

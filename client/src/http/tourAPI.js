@@ -16,8 +16,8 @@ export const createTour = async (tour) => {
     return data;
 }
 
-export const deleteTour = async (tour) => {
-    const {data} = await $authHost.delete('api/tour', tour);
+export const deleteTour = async (id) => {
+    const {data} = await $authHost.delete('api/tour/' + id);
     return data;
 }
 
