@@ -14,8 +14,6 @@ class OrderController {
     }
 
     async getAll(req, res) {
-        //const tours = await Tour.findAll();
-        //return res.json(tours);
 
         let {status, userId, page, limit} = req.query;
         page = page || 1;
@@ -53,9 +51,8 @@ class OrderController {
         })
     }
 
-    async delete(req, res) { // доробити метод
+    async delete(req, res) { 
         const id = req.params.id;
-        // let tour = Tour.build({id: id}, { isNewRecord: false })
         Order.destroy({where: {id: id}}).then(() => {
             return res.status(200).json('Order with id = ' + id + ' removed successfully');
            }).catch((err) => {

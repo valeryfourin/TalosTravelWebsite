@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import '../styles/Auth.scss';
 import '../styles/NavBar.scss';
 import {Button, Container, Form, Row} from 'react-bootstrap';
@@ -9,10 +9,12 @@ import { fetchUsers, login, registration } from '../http/userAPI';
 import { Context } from '../index';
 import { observer } from 'mobx-react-lite';
 import VioletButton from '../components/VioletButton';
+import { fetchOrders } from '../http/orderAPI';
 
 
 const Auth = observer(() => {
   const {user} = useContext(Context)
+  const {order} = useContext(Context)
   const location = useLocation();
   const history = useHistory();
   const isLogin = location.pathname === LOGIN_ROUTE
@@ -22,25 +24,31 @@ const Auth = observer(() => {
 
 
   const clickAuth = async () => {
-    if (isLogin) {
-      const data = await login(email, password).then( data => {
-        user.setRole(data.dataRole)
-        user.setId(data.dataId);
-        user.setEmail(data.dataEmail);
-      });
-    } else {
-      const data = await registration(email, password).then( data => {
-        user.setRole(data.dataRole)
-        user.setId(data.dataId);
-        user.setEmail(data.dataEmail);
-      });
-    }
-      user.setUser(user);
-      user.setIsAuth(true); 
-      // fetchUsers(user.email).then(data => {user.setRole(data[0].role)})
+    try {
+      if (isLogin) {
+        const data = await login(email, password).then( data => {
+          user.setRole(data.dataRole)
+          user.setId(data.dataId);
+          user.setEmail(data.dataEmail);
+          user.setPreviousOrders(data.dataPrevOrders);
+        });
+      } else {
+        const data = await registration(email, password).then( data => {
+          user.setRole(data.dataRole)
+          user.setId(data.dataId);
+          user.setEmail(data.dataEmail);
+        });
+      }
       
-      history.push(OFFERS_ROUTE); 
+        user.setUser(user);
+        user.setIsAuth(true); 
+        
+        history.push(OFFERS_ROUTE); 
+      } catch (e) {
+        alert(e.response.data.message)
+    }
   } 
+  
 
   return (
     <Container 

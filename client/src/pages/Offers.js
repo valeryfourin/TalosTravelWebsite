@@ -7,7 +7,6 @@ import SearchBar from '../components/SearchBar';
 import { observer } from 'mobx-react-lite';
 import { Context } from '../index';
 import { fetchAccomms, fetchTours } from '../http/tourAPI';
-// import Pages from '../components/Pages';
 
 
 const Offers = observer(() => {
@@ -21,13 +20,13 @@ const Offers = observer(() => {
   }, []);
   
   useEffect(() => {
-    fetchTours(tour.selectedCountry).then(data => { 
+    fetchTours(tour.selectedCountry, null).then(data => { 
       tour.setTours(data)
     })
   }, [tour.selectedCountry,])
 
   useEffect(() => {
-    fetchTours( null ).then(data => { 
+    fetchTours(null).then(data => { 
       tour.setTours(data)
     })
   }, [tour.selectedCountry === 'Show all tours',])
@@ -48,7 +47,6 @@ const Offers = observer(() => {
         
         <Col md={10}>
           <TourList/>
-          {/* <Pages/> */}
         </Col>
       </Row>
     </Container>

@@ -10,13 +10,12 @@ import VioletButton from '../VioletButton';
 import '../../styles/SearchBar.scss';
 import { evaluatePrice, evaluateNights } from '../Calculator';
 import { observer } from 'mobx-react-lite';
-import reactDom from 'react-dom';
+import { assignPreviousOrders } from '../../http/userAPI';
 
 const BookTourModal = observer((props) => {
 
 
     const {user} = useContext(Context);
-    const {tour} = useContext(Context);
 
     const [valueCalendar, setValueCalendar] = useState([new Date(), new Date()]);
     const [peopleNumber, setPeopleNumber] = useState(1);
@@ -25,7 +24,6 @@ const BookTourModal = observer((props) => {
     const [nights, setNights] = useState(1);
     const userId = user.id;
     const tourId = props.tour.id;
-    // const [totalPrice, setTotalPrice] = useState(props.tour.cost);
     let totalPrice = props.tour.cost;
 
     let activitiesArray = String(props.tour.activities).split(',')
@@ -38,20 +36,12 @@ const BookTourModal = observer((props) => {
       setStartDate(valueCalendar[0])
       setEndDate(valueCalendar[1])
       setNights(evaluateNights(startDate, endDate))
-      // nights = evaluateNights(startDate, endDate)
     }, [valueCalendar]);
     
 
     useEffect(() => {
       totalPrice = evaluatePrice(props.tour.cost, startDate, endDate, peopleNumber)
     }, [valueCalendar,nights,peopleNumber]);
-    // useEffect(() => {
-    //   totalPrice = evaluatePrice(props.tour.cost, startDate, endDate, peopleNumber)
-    // }, [nights]);
-    // useEffect(() => {
-    //   totalPrice = evaluatePrice(props.tour.cost, startDate, endDate, peopleNumber)
-    // }, [peopleNumber]);
-    
     const priceNumber = document.createElement('div');
     useEffect(() => {
       ReactDOM.render(<h6>Total price: {totalPrice} $</h6>, priceNumber)
@@ -85,7 +75,12 @@ const BookTourModal = observer((props) => {
       formData.append('tourId', tourId);
       formData.append('totalPrice', `${totalPrice}`);
 
-      createOrder(formData).then(data => { props.onHide(); console.log(data)})
+
+      createOrder(formData).then(data => { 
+        props.onHide(); 
+        assignPreviousOrders(user.id, `id = ${data.id}`)
+        console.log(data)
+      })
     }
     
     return (
@@ -113,8 +108,7 @@ const BookTourModal = observer((props) => {
               minDate={new Date()}/>
                 
              <GuestsCount onGetPeopleNumber={getPeopleNumber}/>
-            {/*<Form.Check inline label="1" type="radio" id={`inline-radio-1`} />
-            <Form.Check inline label="2" type="radio" id={`inline-radio-2`} /> */}
+
             <div className="tour-description-container">
                 <br/>
                 <div className=""><h6>Available activities:</h6> 
@@ -131,13 +125,9 @@ const BookTourModal = observer((props) => {
             <VioletButton 
               id='priceButton' 
               text='Evaluate price'
-              // onClick={e => {document.getElementById(totalPrice).innerText += totalPriceContainer.innerText}}/>
-              // onClick={e => {document.getElementById("totalPrice").removeChild(totalPriceContainer)}}/>
                onClick={showEvaluatedPrice}/>
-              
             <div style={{textAlign: 'right'}} id='totalPrice' ></div>
             
-
           </Form>
         </Modal.Body>
         <Modal.Footer>

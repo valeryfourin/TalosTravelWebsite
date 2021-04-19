@@ -14,21 +14,19 @@ const generateJwt = (id, email, role) => {
 
 class UserController {
     async registration(req, res, next) {
-        const {email, password, role} = req.body;
+        const {email, password, role, previousOrders} = req.body;
         if (!email || !password ) {
-            return next(ApiError.badRequest('Wrong email or password')); // вдосконалити перевірку
+            return next(ApiError.badRequest('Wrong email or password')); 
         }
         const candidate = await User.findOne({where: {email}});
         if (candidate) {
             return next(ApiError.badRequest('User with this email already exists'));
         }
         const hashPassword = await bcrypt.hash(password, 5);
-        const user = await User.create({email, role, password: hashPassword});
+        const user = await User.create({email, role, password: hashPassword, previousOrders});
         const account = await Account.create({userId: user.id});
-        const token = generateJwt(user.id, user.email, user.role);
+        const token = generateJwt(user.id, user.email, user.role, user.previousOrders);
         
-        // const userRole = user.role;
-        // return res.json({token, userRole});
         
         return res.json({token});
     }
@@ -65,19 +63,24 @@ class UserController {
         if (!comparePassword) {
             return next(ApiError.internal("Password is not correct"));
         }
-        const token = generateJwt(user.id, user.email, user.role);
+        const token = generateJwt(user.id, user.email, user.role, user.previousOrders);
         
-        // const role = user.role;
-        // return res.json({token, role});
         return res.json({token});
     }
 
     async check(req, res, next) {
-        const token = generateJwt(req.user.id, req.user.email, req.user.role);
-        // const role = req.user.role;
-        // const id = req.user.id;
-        // return res.json({token, role, id});
+        const token = generateJwt(req.user.id, req.user.email, req.user.role, req.user.previousOrders);
         return res.json({token});
+    }
+
+    async update(req, res, next) {
+        const {id, prevOrders} = req.body;
+        User.update({previousOrders: prevOrders}, {where: {id: id}}).then(() => {
+            res.status(200).json('User with id = ' + id + ' updated successfully')
+        }).catch(err => {
+            console.log(err);
+            res.status(500).json('We failed to update for the reason: ' + err)
+        })
     }
 }
 

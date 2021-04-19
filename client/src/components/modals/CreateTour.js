@@ -13,7 +13,7 @@ const CreateTour = observer(({show, onHide, ...props}) => {
   const [country, setCountry] = useState('');
   const [description, setDescription] = useState('');
   const [cost, setCost] = useState('');
-  const [type, setType] = useState(null);
+  const [type, setType] = useState('bus');
   const [activities, setActivities] = useState([]);
   const [file, setFile] = useState(null)
 

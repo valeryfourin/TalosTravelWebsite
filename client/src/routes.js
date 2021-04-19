@@ -2,8 +2,7 @@ import Account from "./pages/Account"
 import Admin from "./pages/Admin"
 import Auth from "./pages/Auth"
 import Offers from "./pages/Offers"
-import TourPage from "./pages/TourPage"
-import { ACCOUNT_ROUTE, ADMIN_ROUTE, OFFERS_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, TOUR_ROUTE } from "./utils/consts"
+import { ACCOUNT_ROUTE, ADMIN_ROUTE, OFFERS_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE } from "./utils/consts"
 
 export const authRoutes = [
     {
@@ -28,10 +27,5 @@ export const publicRoutes = [
     {
         path: REGISTRATION_ROUTE,
         Component: Auth
-    },
-    {
-        path: TOUR_ROUTE + '/:id',
-        Component: TourPage
-    },
-    
+    }
 ]

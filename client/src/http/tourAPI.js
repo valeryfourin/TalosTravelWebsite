@@ -1,5 +1,4 @@
 import {$authHost, $host} from './index';
-import jwtDecode from 'jwt-decode';
 
 export const createAccomm = async (accommodation) => {
     const {data} = await $authHost.post('api/accommodation', accommodation);
@@ -21,20 +20,12 @@ export const deleteTour = async (id) => {
     return data;
 }
 
-export const fetchTours = async (country) => {
-    const {data} = await $host.get('api/tour', {params: {
-        country
-    }});
+export const fetchTours = async (country, id) => {
+    const {data} = await $host.get('api/tour', {params: {country, id}});
     return data;
 }
 
 export const fetchOneTour = async (id) => {
-    const {data} = await $host.get('api/tour', id )
+    const {data} = await $host.get('api/tour/' + id )
     return data;
 }
-
-// export const check = async () => {
-//     const {data} = await $authHost.post('api/user/auth' )
-//     localStorage.setItem('token', data.token)
-//     return jwtDecode(data.token);
-// }

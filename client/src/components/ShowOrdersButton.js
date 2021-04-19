@@ -1,9 +1,7 @@
 
 import { observer } from 'mobx-react-lite';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, Collapse } from 'react-bootstrap';
-import { fetchOrders } from '../http/orderAPI';
-import { Context } from '../index';
 import OrderTable from './OrderTable';
 
 const ShowUsersButton = observer(() => {

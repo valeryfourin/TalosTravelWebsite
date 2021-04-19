@@ -1,4 +1,3 @@
-// import logo from './logo.svg';
 import './styles/App.scss';
 import React, { useContext, useEffect, useState } from 'react';
 import NavBar from './components/NavBar';
@@ -22,9 +21,11 @@ const App = observer(() => {
       user.setId(data.dataId);
       user.setRole(data.dataRole);
       user.setEmail(data.dataEmail);
+      user.setPreviousOrders(data.dataPrevOrders);
       console.log(user.role);
       console.log('id: ' + user.id);
       console.log('email: ' + user.email)
+      console.log(data.dataPrevOrders);
     }).finally(() => setLoading(false))
   }, []);
 

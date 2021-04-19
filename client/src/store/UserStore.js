@@ -9,6 +9,7 @@ export default class UserStore {
         this._id = "";
         this._role = "";
         this._email = "";
+        this._previousOrders = "";
         this._token = "";
         makeAutoObservable(this);
     }
@@ -28,6 +29,9 @@ export default class UserStore {
     setRole(role) {
         this._role = role;
     }
+    setPreviousOrders(previousOrders) {
+        this._previousOrders = previousOrders;
+    }
     setId(id) {
         this._id = id;
     }
@@ -46,6 +50,9 @@ export default class UserStore {
     }
     get role() {
         return this._role;
+    }
+    get previousOrders() {
+        return this._previousOrders;
     }
     get id() {
         return this._id;

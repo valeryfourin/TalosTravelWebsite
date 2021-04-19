@@ -28,10 +28,6 @@ const Account = sequelize.define( 'account', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
 });
 
-const TourInAccount = sequelize.define( 'tourInAccount', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-});
-
 const Accommodation = sequelize.define( 'accommodation', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     type: {type: DataTypes.STRING},
@@ -77,13 +73,9 @@ const Contract = sequelize.define( 'contract', {
     customerInfo: {type: DataTypes.STRING, allowNull: false}
 });
 
-// decide what to do with accommodation
 
 User.hasOne(Account);
 Account.belongsTo(User);
-
-Account.hasMany(TourInAccount);
-TourInAccount.belongsTo(Account);
 
 User.hasMany(Contract);
 Contract.belongsTo(User);
@@ -104,7 +96,6 @@ module.exports = {
     User,
     Tour,
     Account,
-    TourInAccount,
     Accommodation,
     Order,
     Payment,

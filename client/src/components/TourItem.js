@@ -1,12 +1,8 @@
-// import { observer } from 'mobx-react-lite';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import {Context} from '../index';
-
 import LaunchModal from './modals/TourItemModal';
 import '../styles/TourItem.scss';
 import {  Card, Col, Row, Image} from 'react-bootstrap';
-import VioletButton from './VioletButton';
-import { fetchUser } from '../http/userAPI';
 import LaunchBookTourModal from './modals/BookTourModal';
 
 const TourItem = ({tour}) => {

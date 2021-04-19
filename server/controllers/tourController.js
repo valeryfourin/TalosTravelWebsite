@@ -68,9 +68,8 @@ class TourController {
         return res.json(req.body)
     }
     
-    async delete(req, res) { // доробити метод
+    async delete(req, res) { 
         const id = req.params.id;
-        // let tour = Tour.build({id: id}, { isNewRecord: false })
         Tour.destroy({where: {id: id}}).then(() => {
             return res.status(200).json('Tour with id = ' + id + ' removed successfully');
            }).catch((err) => {

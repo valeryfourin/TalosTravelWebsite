@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { Context } from '..';
 import '../styles/Account.scss'
@@ -14,12 +14,13 @@ const Account = () => {
   const {user} = useContext(Context);
   const {order} = useContext(Context);
   const history = useHistory();
+  console.log(order.orders.length)
 
   useEffect(() => {
-    fetchOrders(null, user.id).then(data => { 
+    fetchOrders(user.id).then(data => { 
       order.setOrders(data)
     })
-  }, [])
+  }, []) 
   
   return (
     <Container className="d-flex flex-column text-center mt-5 admin-functions-container">
@@ -28,7 +29,7 @@ const Account = () => {
     <div style={{textAlign: 'left'}}><h4>Your orders:</h4></div>
     <br />
     <OrderTable />
-    { order.orders.length == 0 
+    { order.orders.length === 0 
       ?
       <>
         <h6>No orders yet</h6>

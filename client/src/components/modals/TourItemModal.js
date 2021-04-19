@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Image, Modal } from "react-bootstrap";
 import VioletButton from '../VioletButton';

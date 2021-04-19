@@ -7,7 +7,6 @@ import VioletButton from './VioletButton';
 
 const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     <a
-      // href=""
       ref={ref}
       className="country-toggle-link"
       onClick={(e) => {
@@ -16,13 +15,10 @@ const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
       }}
     >
       {children}
-      {/* <FontAwesomeIcon icon="caret-down" /> */} 
       <i className="fa fa-caret-down ml-1"/>
     </a>
   ));
   
-  // forwardRef again here!
-  // Dropdown needs access to the DOM of the Menu to measure it
   const CustomMenu = React.forwardRef(
     ({ children, style, className, 'aria-labelledby': labeledBy }, ref) => {
       const [value, setValue] = useState('');

@@ -6,9 +6,9 @@ export const createOrder = async (order) => {
     return data;
 }
 
-export const fetchOrders = async (country, userId) => {
+export const fetchOrders = async (userId) => {
     const {data} = await $host.get('api/order', {params: {
-        country, userId
+         userId
     }});
     return data;
 }
@@ -20,5 +20,5 @@ export const fetchOneOrder = async (id) => {
 
 export const confirmOrder = async (id, status) => {
     await $host.put('api/order', { id, status });
-    // return data;
+
 }
