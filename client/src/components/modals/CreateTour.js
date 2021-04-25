@@ -37,13 +37,13 @@ const CreateTour = observer(({show, onHide, ...props}) => {
   }
   
   const addTour =  (event) => {
+    setValidated(true);
+
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
     }
-
-    setValidated(true);
     
     const formData = new FormData();
     formData.append('title', title);

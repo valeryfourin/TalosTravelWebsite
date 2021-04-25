@@ -12,11 +12,11 @@ const DeleteTour = observer(({show, onHide, ...props}) => {
   function deleteTourClick() {
     let tourId = null;
     tour.tours.map(tour => {
-      if (id === tour.id) {
+      if (id == tour.id) {
         tourId = tour.id
+        
       }
     })
-
     if (tourId === null) {
       alert('Tour with id ' + id + ' does not exist.')
     } else {

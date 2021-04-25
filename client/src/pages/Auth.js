@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import '../styles/Auth.scss';
 import '../styles/NavBar.scss';
-import {Button, Container, Form, Row} from 'react-bootstrap';
+import { Container, Form, Row} from 'react-bootstrap';
 import {NavLink, useHistory, useLocation} from 'react-router-dom';
 import Card from "react-bootstrap/Card"
 import { LOGIN_ROUTE, OFFERS_ROUTE, REGISTRATION_ROUTE } from '../utils/consts';
-import { fetchUsers, login, registration } from '../http/userAPI';
+import { login, registration } from '../http/userAPI';
 import { Context } from '../index';
 import { observer } from 'mobx-react-lite';
 import VioletButton from '../components/VioletButton';
@@ -18,12 +18,20 @@ const Auth = observer(() => {
   const location = useLocation();
   const history = useHistory();
   const isLogin = location.pathname === LOGIN_ROUTE
+  
+  const [validated, setValidated] = useState(false);
 
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState(''); 
   const [password, setPassword] = useState('');
 
+  useEffect(() => {
+    fetchOrders(user.id).then(data => { 
+      order.setOrders(data)
+    })
+  }, []) 
 
   const clickAuth = async () => {
+    setValidated(true);
     try {
       if (isLogin) {
         const data = await login(email, password).then( data => {
@@ -56,7 +64,7 @@ const Auth = observer(() => {
     >
       <Card className="auth-card p-5">
         <h2 className="m-auto">{isLogin ? 'Sign in' : 'Registration'}</h2>
-        <Form className="d-flex flex-column">
+        <Form className="d-flex flex-column" noValidate validated={validated}>
           <Form.Control 
             className="mt-3"
             placeholder="Please input your email..."

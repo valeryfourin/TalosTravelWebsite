@@ -33,7 +33,8 @@ const TourTable = observer(() => {
     }
 
     function createContract(tourId, date, peopleNumber, price, orderId, orderStatus) {
-      let text = `user: ${user.email},
+      let text = `Talos Travel Agency
+user: ${user.email},
 
 tour id: ${tourId},
 date: ${date},
