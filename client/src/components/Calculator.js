@@ -1,6 +1,6 @@
-export function evaluatePrice(tourPrice, startDateParam, endDateParam, numberOfPeople = 1) {
+export function evaluatePrice(tourPrice, startDateParam, endDateParam, accommPrice, numberOfPeople = 1) {
     let countNights = evaluateNights(startDateParam, endDateParam);
-    let total = tourPrice * countNights * numberOfPeople;
+    let total = tourPrice * countNights * numberOfPeople + accommPrice * countNights;
     return total;
 }
 

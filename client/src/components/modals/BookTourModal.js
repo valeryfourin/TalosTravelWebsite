@@ -2,26 +2,29 @@
 import DateRangePicker from '@wojtekmaj/react-daterange-picker';
 import React, { useContext, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { Form, Image, Modal } from "react-bootstrap";
+import { Form, Modal } from "react-bootstrap";
 import { Context } from '../..';
 import { createOrder } from '../../http/orderAPI';
 import GuestsCount from '../GuestsCount';
-import VioletButton from '../VioletButton';
+import VioletButton from '../buttons/VioletButton';
 import '../../styles/SearchBar.scss';
 import { evaluatePrice, evaluateNights } from '../Calculator';
 import { observer } from 'mobx-react-lite';
 import { assignPreviousOrders } from '../../http/userAPI';
+import { fetchAccomms } from '../../http/tourAPI';
 
 const BookTourModal = observer((props) => {
 
-
+    const {tour} = useContext(Context);
     const {user} = useContext(Context);
 
     const [valueCalendar, setValueCalendar] = useState([new Date(), new Date()]);
     const [peopleNumber, setPeopleNumber] = useState(1);
     const [startDate, setStartDate] = useState(valueCalendar[0]);
     const [endDate, setEndDate] = useState(valueCalendar[1]);
+    const [accommPrice, setAccommPrice] = useState(0);
     const [nights, setNights] = useState(1);
+    const [accommId, setAccommId] = useState(0);
     const userId = user.id;
     const tourId = props.tour.id;
     let totalPrice = props.tour.cost;
@@ -40,8 +43,8 @@ const BookTourModal = observer((props) => {
     
 
     useEffect(() => {
-      totalPrice = evaluatePrice(props.tour.cost, startDate, endDate, peopleNumber)
-    }, [valueCalendar,nights,peopleNumber]);
+      totalPrice = evaluatePrice(props.tour.cost, startDate, endDate, accommPrice, peopleNumber)
+    }, [valueCalendar,nights,peopleNumber, accommPrice]);
     const priceNumber = document.createElement('div');
     useEffect(() => {
       ReactDOM.render(<h6>Total price: {totalPrice} $</h6>, priceNumber)
@@ -73,6 +76,7 @@ const BookTourModal = observer((props) => {
       formData.append('nights', nights);
       formData.append('userId', userId);
       formData.append('tourId', tourId);
+      formData.append('accommId', accommId);
       formData.append('totalPrice', `${totalPrice}`);
 
 
@@ -80,6 +84,7 @@ const BookTourModal = observer((props) => {
         props.onHide(); 
         assignPreviousOrders(user.id, `id = ${data.id}`)
         console.log(data)
+        alert("Order successfully created. You can see details in your account.")
       })
     }
     
@@ -111,15 +116,22 @@ const BookTourModal = observer((props) => {
 
             <div className="tour-description-container">
                 <br/>
-                <div className=""><h6>Available activities:</h6> 
                 <div>
-                    { 
-                        activitiesArray.map(element => 
-                            <Form.Check key={activitiesArray.indexOf(element)} type="radio" label={element} style={{width: '5'}} className="pt-1" />)
-                    }
-                </div>
-                <br/>
-                <i>Note: excursions and accommodation are not included in the price!</i>
+                  <h6>Available activities:</h6> 
+                  <div>
+                      { 
+                          activitiesArray.map(element => 
+                              <Form.Check key={activitiesArray.indexOf(element)} type="radio" name="group1" label={element} style={{width: '5'}} className="pt-1" />)
+                      }
+                  </div>
+                  <br/>
+                  <h6>Available accommodation:</h6> 
+                  <div>
+                    {tour.accomms.map(accomm => 
+                      <Form.Check key={accomm.id} type="radio" name="group2" onClick={() => {setAccommId(accomm.id); console.log(accomm.id); setAccommPrice(accomm.price); console.log(accomm.price);}} label={accomm.title + " " + accomm.type} />)}
+                  </div>
+                  <br/>
+                  <i>Note: excursions and accommodation are not included in the price!</i>
                 </div>
             </div>
             <VioletButton 
@@ -155,6 +167,13 @@ const BookTourModal = observer((props) => {
     function bookTour() {
         checkAuth()
     }
+
+    const {tour} = useContext(Context);
+    useEffect(() => {
+      fetchAccomms(props.tour.id).then(data => { 
+        tour.setAccomms(data)
+      })
+    }, [modalShow]);
 
     return (
       <>

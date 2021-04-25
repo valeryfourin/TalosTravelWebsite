@@ -1,20 +1,11 @@
 
 import { observer } from 'mobx-react-lite';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, Collapse } from 'react-bootstrap';
-import { fetchUsers } from '../http/userAPI';
-import { Context } from '../index';
-import UserTable from './UserTable';
+import TourTable from '../tables/TourTable';
 
 const ShowToursButton = observer(() => {
     const [open, setOpen] = useState(false);
-    const {user} = useContext(Context);
-  
-    useEffect(() => {
-      fetchUsers().then(data => { 
-        user.setUsers(data)
-      })
-    }, []);
 
     return (
       <>
@@ -25,11 +16,11 @@ const ShowToursButton = observer(() => {
           variant="outline-secondary"
           className="mt-1 search-button"
         >
-          Show users
+          Show tours
         </Button>
         <Collapse in={open}>
           <div id="example-collapse-text">
-            <UserTable/>
+            <TourTable/>
           </div>
         </Collapse>
       </>

@@ -1,11 +1,11 @@
 import { observer } from 'mobx-react-lite';
 import { useContext, useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
-import { confirmOrder, fetchOrders } from '../http/orderAPI';
-import {Context} from '../index';
-import VioletButton from './VioletButton';
-import { createContractFile } from './createContract';
-import { fetchTours } from '../http/tourAPI';
+import { confirmOrder, fetchOrders } from '../../http/orderAPI';
+import {Context} from '../../index';
+import VioletButton from '../buttons/VioletButton';
+import { createContractFile } from '../createContract';
+import { fetchTours } from '../../http/tourAPI';
 
 const TourTable = observer(() => {
     const {order} = useContext(Context);
@@ -26,13 +26,10 @@ const TourTable = observer(() => {
     function confirm(id) {
       setConfirmed(true);
       setOrderId(id);
-      
-      console.log(orderId)
-      console.log(status)
       confirmOrder(orderId, status)
     }
 
-    function createContract(tourId, date, peopleNumber, price, orderId, orderStatus) {
+    function createContract(tourId, date, peopleNumber, price, orderId, accommId, orderStatus) {
       let text = `Talos Travel Agency
 user: ${user.email},
 
@@ -41,6 +38,7 @@ date: ${date},
 number of people: ${peopleNumber},
 price: ${price},
 order id: ${orderId},
+accommodation id: ${accommId},
 order status: ${orderStatus},
 
       contract created at ${new Date().toISOString().slice(0,16).replace(/T/g," ")}
@@ -62,6 +60,7 @@ order status: ${orderStatus},
       <th>status</th>
       {user.role === 'ADMIN' ? <th>user id</th> : null }
       <th>tour id</th>
+      <th>accommodation id</th>
       {user.role === 'USER' ? <th>start date</th> : null }
       {user.role === 'USER' ? <th>end date</th> : null }
       <th>people number</th>
@@ -76,6 +75,7 @@ order status: ${orderStatus},
                     <td>{order.status}</td>
                     {user.role === 'ADMIN' ? <td>{order.userId}</td> : null}
                     <td>{order.tourId}</td>
+                    <td>{order.accommId}</td>
                     {user.role === 'USER' ? <td>{new Date(order.startDate).toISOString().slice(0,10).replace(/-/g,"/")}</td> : null}
                     {user.role === 'USER' ? <td>{new Date(order.endDate).toISOString().slice(0,10).replace(/-/g,"/")}</td> : null}
                     <td>{order.numberOfPeople}</td>
@@ -88,7 +88,7 @@ order status: ${orderStatus},
                         text='download contract' 
                         onClick={() => createContract(order.tourId, 
                         `${new Date(order.startDate).toISOString().slice(0,10).replace(/-/g,"/")} - ${new Date(order.endDate).toISOString().slice(0,10).replace(/-/g,"/")}`, 
-                        order.numberOfPeople, order.totalPrice, order.id, order.status)} /> 
+                        order.numberOfPeople, order.totalPrice, order.id, order.accommId, order.status)} /> 
                       : 
                       null}
                     

@@ -5,18 +5,15 @@ export const createAccomm = async (accommodation) => {
     return data;
 }
 
-export const fetchAccomms = async () => {
-    const {data} = await $host.get('api/accommodation');
+export const fetchAccomms = async (tourId) => {
+    const {data} = await $host.get('api/accommodation', {params: {
+        tourId
+   }});
     return data;
 }
 
 export const createTour = async (tour) => {
     const {data} = await $authHost.post('api/tour', tour);
-    return data;
-}
-
-export const deleteTour = async (id) => {
-    const {data} = await $authHost.delete('api/tour/' + id);
     return data;
 }
 
@@ -27,5 +24,14 @@ export const fetchTours = async (country, id) => {
 
 export const fetchOneTour = async (id) => {
     const {data} = await $host.get('api/tour/' + id )
+    return data;
+}
+
+export const deleteTour = async (id) => {
+    const {data} = await $authHost.delete('api/tour/' + id);
+    return data;
+}
+export const deleteAccomm = async (id) => {
+    const {data} = await $authHost.delete('api/accommodation/' + id);
     return data;
 }

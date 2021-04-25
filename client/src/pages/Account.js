@@ -2,9 +2,9 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { Context } from '..';
 import '../styles/Account.scss'
-import OrderTable from '../components/OrderTable';
+import OrderTable from '../components/tables/OrderTable';
 import { fetchOrders } from '../http/orderAPI';
-import VioletButton from '../components/VioletButton';
+import VioletButton from '../components/buttons/VioletButton';
 import { useHistory } from 'react-router';
 import { OFFERS_ROUTE } from '../utils/consts';
 

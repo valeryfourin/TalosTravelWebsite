@@ -50,6 +50,7 @@ const Order = sequelize.define( 'order', {
     status: {type: DataTypes.STRING, defaultValue: "Waiting"},
     tourId: {type: DataTypes.INTEGER, allowNull: false},
     userId: {type: DataTypes.INTEGER, allowNull: false},
+    accommId: {type: DataTypes.INTEGER, allowNull: false},
     nights: {type: DataTypes.INTEGER},
     startDate: {type: DataTypes.STRING},
     endDate: {type: DataTypes.STRING},

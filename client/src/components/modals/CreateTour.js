@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Button, Dropdown, Form, Modal} from 'react-bootstrap';
 import { createTour, fetchAccomms, fetchTours } from '../../http/tourAPI';
 import {Context} from '../../index';
-import VioletButton from '../VioletButton';
+import VioletButton from '../buttons/VioletButton';
 
 const CreateTour = observer(({show, onHide, ...props}) => {
   const [validated, setValidated] = useState(false);

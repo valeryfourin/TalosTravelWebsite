@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import '../styles/Offers.scss';
 import { Col, Container, Row } from 'react-bootstrap';
 import TourBar from '../components/TourBar';
-import TourList from '../components/TourList';
+import TourList from '../components/lists/TourList';
 import SearchBar from '../components/SearchBar';
 import { observer } from 'mobx-react-lite';
 import { Context } from '../index';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from "react-bootstrap";
-import '../styles/VioletButton.scss';
+import '../../styles/VioletButton.scss';
 
 const VioletButton = (props) => {
     return (

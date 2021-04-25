@@ -4,8 +4,8 @@ const ApiError = require("../error/ApiError");
 class OrderController { 
     async create(req, res, next) {
         try {
-            const {tourId, userId, nights, startDate, endDate, numberOfPeople, totalPrice} = req.body;
-            const order = await Order.create({tourId, userId, nights, startDate, endDate, numberOfPeople, totalPrice});
+            const {tourId, userId, nights, startDate, endDate, numberOfPeople, accommId, totalPrice} = req.body;
+            const order = await Order.create({tourId, userId, nights, startDate, endDate, numberOfPeople, accommId, totalPrice});
 
             return res.json(order);
         } catch (e) {

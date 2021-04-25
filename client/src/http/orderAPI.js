@@ -1,5 +1,4 @@
 import {$authHost, $host} from './index';
-import jwtDecode from 'jwt-decode';
 
 export const createOrder = async (order) => {
     const {data} = await $authHost.post('api/order', order);

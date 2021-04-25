@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import { useContext } from 'react';
 import { Row, Table } from 'react-bootstrap';
-import {Context} from '../index';
+import {Context} from '../../index';
 
 const TourTable = observer(() => {
     const {tour} = useContext(Context);

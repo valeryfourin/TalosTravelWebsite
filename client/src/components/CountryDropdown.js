@@ -3,7 +3,7 @@ import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { Dropdown,  FormControl } from 'react-bootstrap';
 import {Context} from '../index';
-import VioletButton from './VioletButton';
+import VioletButton from './buttons/VioletButton';
 
 const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     <a

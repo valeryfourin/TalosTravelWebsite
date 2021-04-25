@@ -2,11 +2,10 @@
 import { observer } from 'mobx-react-lite';
 import React, { useState } from 'react';
 import { Button, Collapse } from 'react-bootstrap';
-import OrderTable from './OrderTable';
+import AccommTable from '../tables/AccommTable';
 
-const ShowUsersButton = observer(() => {
+const ShowAccommTableButton = observer(() => {
     const [open, setOpen] = useState(false);
-    
 
     return (
       <>
@@ -17,15 +16,15 @@ const ShowUsersButton = observer(() => {
           variant="outline-secondary"
           className="mt-1 search-button"
         >
-          Show orders
+          Show accommodation
         </Button>
         <Collapse in={open}>
           <div id="example-collapse-text">
-            <OrderTable/>
+            <AccommTable/>
           </div>
         </Collapse>
       </>
     );
   });
   
- export default ShowUsersButton;
+ export default ShowAccommTableButton;

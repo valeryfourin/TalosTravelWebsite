@@ -8,7 +8,7 @@ import { LOGIN_ROUTE, OFFERS_ROUTE, REGISTRATION_ROUTE } from '../utils/consts';
 import { login, registration } from '../http/userAPI';
 import { Context } from '../index';
 import { observer } from 'mobx-react-lite';
-import VioletButton from '../components/VioletButton';
+import VioletButton from '../components/buttons/VioletButton';
 import { fetchOrders } from '../http/orderAPI';
 
 

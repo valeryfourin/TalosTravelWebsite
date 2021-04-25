@@ -7,7 +7,7 @@ import {useHistory, NavLink} from 'react-router-dom';
 import { ACCOUNT_ROUTE, ADMIN_ROUTE, LOGIN_ROUTE, OFFERS_ROUTE } from '../utils/consts';
 import {observer} from "mobx-react-lite";
 import Logo from './Logo';
-import VioletButton from './VioletButton';
+import VioletButton from './buttons/VioletButton';
 
    
 

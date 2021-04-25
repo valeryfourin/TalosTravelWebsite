@@ -1,11 +1,20 @@
 
 import { observer } from 'mobx-react-lite';
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Button, Collapse } from 'react-bootstrap';
-import TourTable from './TourTable';
+import { fetchAccomms } from '../../http/tourAPI';
+import { Context } from '../../index';
+import AccommList from '../lists/AccommList';
 
-const ShowUsersButton = observer(() => {
+const ShowAccommButton = observer((props) => {
     const [open, setOpen] = useState(false);
+    const {tour} = useContext(Context);
+  
+    useEffect(() => {
+      fetchAccomms().then(data => { 
+        tour.setAccomms(data)
+      })
+    }, []);
 
     return (
       <>
@@ -16,15 +25,15 @@ const ShowUsersButton = observer(() => {
           variant="outline-secondary"
           className="mt-1 search-button"
         >
-          Show tours
+          Show available accommodation
         </Button>
         <Collapse in={open}>
           <div id="example-collapse-text">
-            <TourTable/>
+            <AccommList tour={props.tour}/>
           </div>
         </Collapse>
       </>
     );
   });
   
- export default ShowUsersButton;
+ export default ShowAccommButton;

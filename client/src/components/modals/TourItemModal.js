@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Image, Modal } from "react-bootstrap";
-import VioletButton from '../VioletButton';
+import { Context } from '../..';
+import { fetchAccomms } from '../../http/tourAPI';
+import ShowAccommButton from '../buttons/ShowAccommButton';
+import VioletButton from '../buttons/VioletButton';
 
 const TourModal = (props) => {
     let activitiesArray = String(props.tour.activities).split(',')
+
+    const {tour} = useContext(Context);
+    const [tourId, setTourId] = useState(props.tour.id);
     
     return (
       <Modal
@@ -34,10 +40,12 @@ const TourModal = (props) => {
                 }
             </div>
             <br/>
+            <ShowAccommButton tour={props.tour}/>
+            <br/>
             <i>Note: excursions and accommodation are not included in the price!</i>
             </div>
         </div>
-        <div style={{textAlign: 'right'}}><h6>{props.tour.cost}$/day</h6></div>
+        <div style={{textAlign: 'right'}}><h6>Tour price: {props.tour.cost}$/day</h6></div>
         </Modal.Body>
         <Modal.Footer>
           <VioletButton 
@@ -52,11 +60,20 @@ const TourModal = (props) => {
   const LaunchModal = (props) => {
 
     const [modalShow, setModalShow] = React.useState(false);
+
+    const [tourId, setTourId] = useState(props.tour.id);
+    
+    const {tour} = useContext(Context);
+    useEffect(() => {
+      fetchAccomms(props.tour.id).then(data => { 
+        tour.setAccomms(data)
+      })
+    }, [modalShow]);
   
     return (
       <>
         <VioletButton 
-          onClick={() => setModalShow(true)}
+          onClick={() => {setModalShow(true); setTourId(props.tour.id)}}
           text="Learn more..."
           />
   
